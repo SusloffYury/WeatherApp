@@ -1,10 +1,13 @@
 import React from 'react';
-import{} from 'react-native';
+import { Text, View } from 'react-native';
 
-const HourlyScreen =()=>{
-    return(
+const HourlyScreen = () => {
+  return (
+    <View>
+      <Text>HourlyScreen </Text>
+    </View>
 
-    )
+  )
 }
 
 export default HourlyScreen;
