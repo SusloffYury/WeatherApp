@@ -1,30 +1,32 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import {createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import  DailyScreen  from '../screens/DailyScreen';
-import  DetailScreen from '../screens/DetailScreen';
-import  MainScreen  from '../screens/MainScreen';
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import DailyScreen, { NavigateStyle } from '../screens/DailyScreen';
+import HourlyScreen from '../screens/HourlyScreen';
+import CityNav from './ViewDetail';
+
 
 const Tab = createBottomTabNavigator();
 
 const MainNavigator = props => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions ={props.onLayout}>
-        <Tab.Screen
-          name='Main'
-          component={MainScreen}
-        />
-        <Tab.Screen
-          name='Daily'
-          component={DailyScreen}
-        />
-        <Tab.Screen
-          name='Detail'
-          component={DetailScreen}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+
+    <Tab.Navigator screenOptions={props.onLayout}>
+      <Tab.Screen
+        name='City'
+        component={CityNav}
+      />
+      <Tab.Screen
+        name='Daily'
+        component={DailyScreen}
+        options={NavigateStyle}
+      />
+      <Tab.Screen
+        name='Detail'
+        component={HourlyScreen}
+      />
+    </Tab.Navigator>
+
   )
 }
 export default MainNavigator;

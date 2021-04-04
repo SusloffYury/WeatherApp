@@ -1,60 +1,73 @@
 
 import * as GetWeather from '../api/weatherRequest';
-export const USER_CITY = 'USER_CITY';
-export const DEFAULT_CITIES = 'DEFAULT_CITIES';
-export const HOURLY_WEATHER = 'HOURLY_WEATHER';
-export const DAILY_WEATHER = 'DAILY_WEATHER';
-export const USER_COORDINATE = 'USER_COORDINATE';
-const UserWeatherCity = weatherParams => {
-    return {
-        type: USER_CITY, weather: weatherParams
-    }
+import * as ActionCreators from './AppActionCreators';
+
+
+export const FetchingUserWeather = () => {
+  return async (dispatch) => {
+    const response = await GetWeather
+      .getWeather()
+      .catch((error) => {
+        dispatch(ActionCreators.ErrorMessage(error))
+      });
+    dispatch(ActionCreators.UserWeatherCity(response))
+  }
 }
-const DailyWeatherCity = weatherParams => {
-    return {
-        type: DAILY_WEATHER, weather: weatherParams
-    }
-}
-const HourlyWeatherCity = weatherParams => {
-    return {
-        type: HOURLY_WEATHER, weather: weatherParams
-    }
-}
-export const SetUserCoordinate = coordinate => {
-    return {
-        type: USER_COORDINATE, userCoordinate: coordinate
-    }
+export const SearchingCityWeather = cityName => {
+  return (dispatch) => {
+    GetWeather
+      .getCityWeather(cityName)
+      .then(response => {
+        dispatch(ActionCreators.SearchingCity(response))
+        dispatch(ActionCreators.ErrorMessage(''))
+      }).catch((error) => {
+        dispatch(ActionCreators
+          .ErrorMessage(
+            error.response.data.cod))
+      });
+
+  }
 }
 
-export const FetchingUserWeather = (city) => {
-    try {
-        return async (dispatch) => {
-            const response = await GetWeather.getWeather(city)
-            dispatch(UserWeatherCity(response))
-        }
-    } catch (error) {
-        console.log(error)
-    }
+export const FetchingDailyWeather = coordinate=> {
+  return (dispatch) => {
+    GetWeather
+      .getDailyWeather(coordinate)
+      .then(response => {
+        dispatch(ActionCreators.DailyWeatherCity(response))
+        }).catch((error) => {
+        dispatch(ActionCreators
+          .ErrorMessage(
+            error.response.data.cod))
+      });
+
+  }
 }
 
-export const FetchingDailyWeather = (city) => {
-    try {
-        return async (dispatch) => {
-            const response = await GetWeather.getDailyWeather(city)
-            dispatch(DailyWeatherCity(response))
-        }
-    } catch (error) {
-        console.log(error)
-    }
+export const GetCity = (coordinate) => {
+  return (dispatch) => {
+    GetWeather
+      .getCityName(coordinate)
+      .then(response => {
+        dispatch(ActionCreators.GetCityName(response.name))
+      }).catch((error) => {
+        dispatch(ActionCreators
+          .ErrorMessage(
+            error.response.data.cod))
+      });
+  }
 }
 
-export const FetchingHourlyWeather = (city) => {
-    try {
-        return async (dispatch) => {
-            const response = await GetWeather.hourly(city)
-            dispatch(HourlyWeatherCity(response))
-        }
-    } catch (error) {
-        console.log(error)
-    }
+export const FetchingHourlyWeather = (coordinate) => {
+  return (dispatch) => {
+    GetWeather
+      .getHourlyWeather(coordinate)
+      .then(response => {
+        dispatch(ActionCreators.HourlyWeatherCity(response))
+      }).catch((error) => {
+        dispatch(ActionCreators
+          .ErrorMessage(
+            error.response.data.cod))
+      });
+  }
 }

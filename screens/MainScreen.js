@@ -1,84 +1,88 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, StyleSheet, Button, Text, FlatList, ScrollView } from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  Button
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
-import { FetchingUserWeather } from '../store/AppActions'
+import * as Actions from '../store/AppActions'
 import { useDispatch, useSelector } from 'react-redux';
-import CityWeather
-  from '../components/defaultCitiesComponent';
+import CityWeather from '../components/defaultCitiesComponent';
+import { ClearInput, ErrorMessage } from '../store/AppActionCreators';
+import SearchingCityWeather from '../components/searchingCityComponent';
+import useDebounce from '../components/useDebounce';
 
-const MainScreen = () => {
- // const dispatch = useDispatch();
-//  const weather = useSelector(state => state.search.defaultCityWeather);
-  const [isBlur, setIsBlure] = useState(false);
-  const [textInput, setTextInput] = useState('');
 
-  const data = [{
-    id: 1,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 2,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 3,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 4,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 44,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 5,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 442,
-    temp: 12,
-    city: 'Gomel'
-  },
-  {
-    id: 51,
-    temp: 12,
-    city: 'Gomel'
-  },
-  
-  ]
+const MainScreen = props => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const DebounceSearchTerm = useDebounce(searchTerm, 500);
+  const dispatch = useDispatch();
 
-  const HandleInput = text => {
-    setTextInput(text);
-  }
-  if (isBlur) {
-    console.log(textInput);
-  }
+  useEffect(() => {
+    if (DebounceSearchTerm) {
+      dispatch(Actions.SearchingCityWeather(DebounceSearchTerm))
+    }
+  }, [DebounceSearchTerm])
+
+  const weather = useSelector(state => state.search.defaultCityWeather)
+  const weatherCity = useSelector(state => state.search.searchingCity)
+  const errorMessage = useSelector(state => state.search.error)
+
   return (
     <View style={styles.screen}>
-
       <View style={styles.inputArea}>
-        <TextInput
-          style={styles.input}
-          placeholder='Enter city here..'
-          onChangeText={HandleInput}
-          onBlur={() => setIsBlure(true)}
-          onFocus={() => setIsBlure(false)}
-          value={textInput}
-        />
+        <View style={styles.inputContainer} >
+          <Ionicons
+            name={Platform.OS == 'android' ? 'md-search' : 'ios-search'}
+            size={20}
+            color='#000'
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Enter city here..'
+            onChangeText={value => setSearchTerm(value)}
+            value={searchTerm}
+          />
+          <Button onPress={() => { props.navigation.navigate('DetailCity') }} />
+          {(weatherCity || errorMessage === '404') ?
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(ClearInput())
+                dispatch(ErrorMessage(''))
+                setSearchTerm('')
+              }}>
+              <Ionicons
+                name={Platform.OS == 'android' ? 'md-close' : 'ios-close'}
+                size={20}
+                color='#000'
+              />
+            </TouchableOpacity>
+            : null}
+        </View>
       </View>
-              <CityWeather data={data}/>
+      {(errorMessage === '404' || weatherCity) ?
+        <SearchingCityWeather
+          enterData={searchTerm}
+          error={errorMessage}
+          cityName={weatherCity.cityName}
+          temperature={weatherCity.temperature}
+          icon={weatherCity.icon}
+        />
+        :
+        <CityWeather data={weather} navigation ={props.navigation} />
+      }
     </View>
-
   )
 }
+export const NavigateStyle = () => {
+  return {
+    headerShown: false
+    }
+  }
 
 const styles = StyleSheet.create({
   screen: {
@@ -87,21 +91,19 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: Colors.primary,
     flex: 1
-
   },
-  inputArea: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  inputContainer: {
+    width: '85%',
     flexDirection: 'row',
-    height: 80
+    borderWidth: 1,
+    borderColor: '#000',
+    paddingLeft: 10,
+    paddingVertical: 5,
+    marginTop: 20
   },
   input: {
-    borderBottomColor: 'black',
-    borderWidth: 1,
     flex: 1,
-    marginHorizontal: 20,
-
   },
- 
+
 })
 export default MainScreen;

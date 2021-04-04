@@ -4,7 +4,7 @@ import { FetchingUserWeather } from '../store/AppActions';
 import * as SplashScreen from 'expo-splash-screen';
 import { useDispatch } from 'react-redux';
 import MainNavigator from '../navigation/MainNavigator';
-import {LocationPicker} from './getCoordinate';
+import { NavigationContainer } from '@react-navigation/native';
 
 export const SplashScreenLoader = () => {
     const [appIsReady, setAppIsReady] = useState(false);
@@ -14,8 +14,7 @@ export const SplashScreenLoader = () => {
         async function prepare() {
             try {
                 await SplashScreen.preventAutoHideAsync();
-                await dispatch(FetchingUserWeather('London'));
-               
+                await dispatch(FetchingUserWeather());
                 await new Promise(resolve => setTimeout(resolve, 2000));
             } catch (e) {
                 console.warn(e);
@@ -35,7 +34,10 @@ export const SplashScreenLoader = () => {
         return null;
     }
     return (
-        <MainNavigator onLayout = {onLayoutRootView} />
+        <NavigationContainer>
+            <MainNavigator onLayout={onLayoutRootView} />
+        </NavigationContainer>
+
     );
 }
 

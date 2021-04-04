@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const HourlyScreen = () => {
+const HourlyScreen = props => {
+  
   return (
     <View>
       <Text>HourlyScreen </Text>
