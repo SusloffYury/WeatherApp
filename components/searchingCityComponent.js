@@ -12,14 +12,17 @@ import ErrorComponent from './errorCityComponent';
 const margin = 5;
 const itemWidth = (Dimensions.get('window').width)
 
+
 const SearchingCityWeather = props => {
-  console.log(props.error)
+  const goToDetail = () => {
+    props.navigation.navigate('DetailCity', { name: props.cityName })
+  }
   return (
     <View>
-      {(props.error === '404') ?
-        <ErrorComponent enterData={props.enterData} />
+      {(props.error === '404')
+        ? <ErrorComponent enterData={props.enterData} />
         :
-        <TouchableOpacity onPress={props.goToDetail}>
+        <TouchableOpacity onPress={goToDetail}>
           <View style={styles.screen}>
             <View style={styles.data}>
               <View style={styles.cityName}>

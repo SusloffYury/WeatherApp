@@ -12,10 +12,8 @@ const margin = 17;
 const itemWidth = (Dimensions.get('window').width / 2) - (margin * 3);
 
 const CityDefault = (props) => {
-
     const goToDetail = () => {
-        console.log(props.cityName)
-        props.navigation.navigate('DetailCity', { name: props.cityName })
+      props.navigation.navigate('DetailCity', { name: props.cityName })
     }
     return (
         <TouchableOpacity onPress={goToDetail}>

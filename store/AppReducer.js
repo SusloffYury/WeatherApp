@@ -64,11 +64,11 @@ export default (state = initialState, action) => {
       const DailyData =
         action.weather.daily.map((item, index) => {
           return {
-            id: item.dt,
+            id: item.dt.toString(),
             temp: item.temp.day,
             icon: WeatherIcons[item.weather[0].main],
-            date: moment().add(index,'days').format('MMM Do'),
-            }
+            date: moment().add(index, 'days').format('MMM Do'),
+          }
         })
       return {
         ...state,
@@ -76,9 +76,18 @@ export default (state = initialState, action) => {
       }
     }
     case HOURLY_WEATHER: {
+      const HourlyData =
+        action.weather.hourly.map((item, index) => {
+          return {
+            id: item.dt.toString(),
+            icon: WeatherIcons[item.weather[0].main],
+            temp: item.temp,
+            date: moment().add(index, 'hour').format('HH:00 Do'),
+          }
+        })
       return {
         ...state,
-        cityHourlyWeather: action.weather
+        cityHourlyWeather: HourlyData
       }
     }
     case USER_COORDINATE: {
@@ -87,6 +96,7 @@ export default (state = initialState, action) => {
         userCoordinate: action.userCoordinate
       }
     }
+
     case CITY_NAME: {
       return {
         ...state,

@@ -1,7 +1,7 @@
 
 import * as GetWeather from '../api/weatherRequest';
 import * as ActionCreators from './AppActionCreators';
-
+import GetUserCoordinate from '../api/getCoordinate';
 
 export const FetchingUserWeather = () => {
   return async (dispatch) => {
@@ -13,6 +13,7 @@ export const FetchingUserWeather = () => {
     dispatch(ActionCreators.UserWeatherCity(response))
   }
 }
+
 export const SearchingCityWeather = cityName => {
   return (dispatch) => {
     GetWeather
@@ -29,18 +30,32 @@ export const SearchingCityWeather = cityName => {
   }
 }
 
-export const FetchingDailyWeather = coordinate=> {
+export const FetchingDailyWeather = coordinate => {
   return (dispatch) => {
     GetWeather
       .getDailyWeather(coordinate)
       .then(response => {
         dispatch(ActionCreators.DailyWeatherCity(response))
-        }).catch((error) => {
+      }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(
             error.response.data.cod))
       });
 
+  }
+}
+
+export const FetchingHourlyWeather = (coordinate) => {
+  return (dispatch) => {
+    GetWeather
+      .getHourlyWeather(coordinate)
+      .then(response => {
+        dispatch(ActionCreators.HourlyWeatherCity(response))
+      }).catch((error) => {
+        dispatch(ActionCreators
+          .ErrorMessage(
+            error.response.data.cod))
+      });
   }
 }
 
@@ -58,16 +73,16 @@ export const GetCity = (coordinate) => {
   }
 }
 
-export const FetchingHourlyWeather = (coordinate) => {
+export const GetCoordinate = () => {
   return (dispatch) => {
-    GetWeather
-      .getHourlyWeather(coordinate)
-      .then(response => {
-        dispatch(ActionCreators.HourlyWeatherCity(response))
-      }).catch((error) => {
+    GetUserCoordinate()
+    .then(coordinate =>
+      dispatch(ActionCreators.SetUserCoordinate(coordinate)))
+      .catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(
             error.response.data.cod))
       });
   }
 }
+

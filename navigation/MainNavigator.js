@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import DailyScreen, { NavigateStyle } from '../screens/DailyScreen';
+import DailyScreen from '../screens/DailyScreen';
 import HourlyScreen from '../screens/HourlyScreen';
 import CityNav from './ViewDetail';
 
@@ -19,7 +19,7 @@ const MainNavigator = props => {
       <Tab.Screen
         name='Daily'
         component={DailyScreen}
-        options={NavigateStyle}
+        
       />
       <Tab.Screen
         name='Detail'
