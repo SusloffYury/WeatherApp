@@ -3,27 +3,29 @@ import {
   Text,
   View,
   StyleSheet,
-  FlatList
+  FlatList,
+  SafeAreaView
 } from 'react-native';
-import HourlyWeatherCity from '../hourlyWeatherComponent';
+import HourlyWeatherCity from '../UIComponents/hourlyWeatherComponent';
 import Colors from '../../constants/Colors';
 
 const HourlyView = props => {
   return (
-    <View style={styles.screen}>
-      <View style={styles.cityName}>
-        <Text>{`${props.cityName}-${props.Date}`}</Text>
-      </View>
-      <FlatList data={props.hourlyWeather}
-        keyExtractor={item => item.id}
-        renderItem={itemData =>
-          <HourlyWeatherCity
-            date={itemData.item.date}
-            temperature={itemData.item.temp}
-            icon={itemData.item.icon} />
-        } />
-    </View >
-
+    <SafeAreaView style={styles.safearea}>
+      <View style={styles.screen}>
+        <View style={styles.cityName}>
+          <Text>{`${props.cityName}-${props.Date}`}</Text>
+        </View>
+        <FlatList data={props.hourlyWeather}
+          keyExtractor={item => item.id}
+          renderItem={itemData =>
+            <HourlyWeatherCity
+              date={itemData.item.date}
+              temperature={itemData.item.temp}
+              icon={itemData.item.icon} />
+          } />
+      </View >
+    </SafeAreaView>
   )
 }
 
@@ -38,7 +40,11 @@ const styles = StyleSheet.create({
   cityName: {
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  safearea: {
+    flex: 1
   }
+
 })
 
 export default HourlyView;

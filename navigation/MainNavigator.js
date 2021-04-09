@@ -5,28 +5,30 @@ import DailyScreen from '../screens/DailyScreen';
 import HourlyScreen from '../screens/HourlyScreen';
 import CityNav from './ViewDetail';
 
-
 const Tab = createBottomTabNavigator();
 
 const MainNavigator = props => {
   return (
-
-    <Tab.Navigator screenOptions={props.onLayout}>
+    <Tab.Navigator
+      screenOptions={
+        props.onLayout,
+        props.screenOptions
+        }>
       <Tab.Screen
         name='City'
         component={CityNav}
-      />
+        />
       <Tab.Screen
         name='Daily'
         component={DailyScreen}
-        
       />
       <Tab.Screen
-        name='Detail'
+        name='Hourly'
         component={HourlyScreen}
       />
     </Tab.Navigator>
-
   )
 }
+
+
 export default MainNavigator;

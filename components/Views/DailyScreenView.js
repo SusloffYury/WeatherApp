@@ -3,26 +3,29 @@ import {
   Text,
   View,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  SafeAreaView
 } from 'react-native';
-import DayliWeatherComponent from '../dailyWeatherComponent';
+import DayliWeatherComponent from '../UIComponents/dailyWeatherComponent';
 import Colors from '../../constants/Colors';
 
 const DailyView = props => {
   return (
-    <View style={styles.screen}>
-      <View style={styles.cityName}>
-        <Text>{props.cityName}</Text>
-      </View>
-      <FlatList data={props.WeatherCityDaily}
-        keyExtractor={item => item.id}
-        renderItem={itemData =>
-          <DayliWeatherComponent
-            date={itemData.item.date}
-            temperature={itemData.item.temp}
-            icon={itemData.item.icon} />
-        } />
-    </View >
+    <SafeAreaView style={styles.safearea}>
+      <View style={styles.screen}>
+        <View style={styles.cityName}>
+          <Text>{props.cityName}</Text>
+        </View>
+        <FlatList data={props.WeatherCityDaily}
+          keyExtractor={item => item.id}
+          renderItem={itemData =>
+            <DayliWeatherComponent
+              date={itemData.item.date}
+              temperature={itemData.item.temp}
+              icon={itemData.item.icon} />
+          } />
+      </View >
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
@@ -36,6 +39,9 @@ const styles = StyleSheet.create({
   cityName: {
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  safearea: {
+    flex: 1
   }
 })
 

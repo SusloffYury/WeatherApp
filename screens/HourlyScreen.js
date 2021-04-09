@@ -15,7 +15,16 @@ const HourlyScreen = props => {
     () => {
       dispatch(Actions.GetCity(coordinate));
       dispatch(Actions.FetchingHourlyWeather(coordinate))
-    }, [])
+    }, [coordinate])
+
+    useEffect(() => {
+      const unsubscribe = props.navigation.addListener('tabPress', (e) => {
+          e.preventDefault();
+          dispatch(Actions.GetCoordinate());
+          console.log('tab')
+       });
+         return unsubscribe;
+    }, [props.navigation]);
 
   return (
     <HourlyWeatherCity

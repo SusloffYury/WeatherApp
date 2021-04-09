@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as Actions from '../store/AppActions'
 import { useDispatch, useSelector } from 'react-redux';
 import { ClearInput, ErrorMessage } from '../store/AppActionCreators';
-import useDebounce from '../components/useDebounce';
+import useDebounce from '../components/FunctionalComponents/useDebounce';
 import MainScreenView from '../components/Views/MainScreenView';
-
+import {SplashScreenLoader} from '../components/FunctionalComponents/SplashScreenLoader';
 
 const MainScreen = props => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,10 +16,19 @@ const MainScreen = props => {
       dispatch(Actions.SearchingCityWeather(DebounceSearchTerm))
     }
   }, [DebounceSearchTerm])
+
+ 
+
   useEffect(() => {
-    dispatch(Actions.GetCoordinate());
-  }, []
-  )
+    const unsubscribe = props.navigation.addListener('tabPress', (e) => {
+        e.preventDefault();
+        dispatch(FetchingUserWeather());
+        console.log('tabMain')
+     });
+       return unsubscribe;
+  }, [props.navigation]);
+
+  
   const weather = useSelector(state => state.search.defaultCityWeather)
   const weatherCity = useSelector(state => state.search.searchingCity)
   const errorMessage = useSelector(state => state.search.error)
@@ -28,9 +37,8 @@ const MainScreen = props => {
     dispatch(ClearInput())
     dispatch(ErrorMessage())
     setSearchTerm('')
-    console.log('Hii')
-  }
-    
+   }
+   
   return (
     <MainScreenView
       weather={weather}

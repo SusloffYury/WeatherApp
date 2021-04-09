@@ -14,12 +14,21 @@ const DailyScreen = props => {
       dispatch(Actions.GetCity(coordinate));
       dispatch(Actions.FetchingDailyWeather(coordinate));
     }, [])
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('tabPress', (e) => {
+      e.preventDefault();
+      dispatch(Actions.GetCoordinate());
+      console.log('tabDay')
+    });
+    return unsubscribe;
+  }, [props.navigation]);
+
 
   return (
     <DailyView
       cityName={cityName}
       WeatherCityDaily={WeatherCityDaily} />
-
   )
 }
+
 export default DailyScreen;

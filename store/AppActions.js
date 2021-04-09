@@ -76,13 +76,9 @@ export const GetCity = (coordinate) => {
 export const GetCoordinate = () => {
   return (dispatch) => {
     GetUserCoordinate()
-    .then(coordinate =>
-      dispatch(ActionCreators.SetUserCoordinate(coordinate)))
-      .catch((error) => {
-        dispatch(ActionCreators
-          .ErrorMessage(
-            error.response.data.cod))
-      });
+      .then(coordinate =>
+        dispatch(ActionCreators.SetUserCoordinate(coordinate)))
+
   }
 }
 
