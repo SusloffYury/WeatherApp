@@ -1,5 +1,4 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import {
   View,
   Text,
@@ -7,17 +6,16 @@ import {
   Image,
   Dimensions
 } from "react-native";
-const margin = 5;
+
+const margin = 7;
 const itemWidth = (Dimensions.get('window').width)
 
-const DailyWeather = props => {
-  const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
-  console.log(IsLoading)
+const SearchingResult = props => {
   return (
     <View style={styles.screen}>
       <View style={styles.data}>
         <View style={styles.cityName}>
-          <Text style={styles.cityFont}>{props.date}</Text>
+          <Text style={styles.cityFont}>{props.cityName}</Text>
         </View>
         <View style={styles.cityTemp}>
           <Text style={styles.tempFont}>{`${props.temperature} C`}</Text>
@@ -40,15 +38,16 @@ const styles = StyleSheet.create({
     marginHorizontal: margin,
   },
   imageContainer: {
-    marginHorizontal: margin,
+    marginVertical: margin + 10,
     width: itemWidth / 5,
     height: itemWidth / 5,
   },
   cityName: {
-    marginVertical: 30,
+    marginVertical: 10,
+    marginLeft: margin + 3,
   },
   cityTemp: {
-    marginLeft: 5
+    marginLeft: 15
   },
   tempFont: {
     fontSize: 15
@@ -58,4 +57,4 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   }
 })
-export default DailyWeather;
+export default SearchingResult;

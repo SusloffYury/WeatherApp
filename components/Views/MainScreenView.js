@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   TextInput,
@@ -29,7 +29,7 @@ const MainScreenView = props => {
               placeholder='Enter city here..'
               onChangeText={value => props.setSearchTerm(value)}
               value={props.searchTerm}
-            />
+               />
             {(props.weatherCity || props.errorMessage === '404') ?
               <TouchableOpacity
                 onPress={props.ClearInputNull}>
@@ -54,7 +54,9 @@ const MainScreenView = props => {
           :
           <CityWeather
             data={props.weather}
-            navigation={props.navigation} />
+            navigation={props.navigation}
+              />
+            
         }
       </View>
     </SafeAreaView>
@@ -84,6 +86,5 @@ const styles = StyleSheet.create({
   safearea: {
     flex: 1,
   }
-
 })
 export default MainScreenView;

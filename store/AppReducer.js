@@ -6,7 +6,8 @@ import {
   SEARCHING_CITY_WEATHER,
   CLEAR_INPUT,
   ERROR_MESSAGE,
-  CITY_NAME
+  CITY_NAME,
+  IS_LOADING_INDICATOR
 } from './AppActionCreators';
 import WeatherIcons from '../models/Weather';
 
@@ -18,8 +19,10 @@ const initialState = {
   userCoordinate: '',
   error: '',
   cityName: '',
+  IsLoadingIndicator: false,
 }
 import moment from "moment";
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case USER_CITY: {
@@ -60,6 +63,13 @@ export default (state = initialState, action) => {
         error: action.message
       }
     }
+    case IS_LOADING_INDICATOR: {
+      return {
+        ...state,
+        IsLoadingIndicator: action.indication
+      }
+    }
+
     case DAILY_WEATHER: {
       const DailyData =
         action.weather.daily.map((item, index) => {

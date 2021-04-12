@@ -22,22 +22,13 @@ const getLocationHandler = async () => {
   if (!hasPermission) {
     return;
   }
-  try {
-    const { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync({});
-    return {
-      lat: latitude,
-      lon: longitude,
-    }
-
-  } catch (err) {
-    Alert.alert(
-      'Could not fetch location!',
-      'Please try again later .',
-      [{ text: 'Okay' }]
-    );
+  
+  const { coords: { latitude, longitude } } =
+    await Location.getCurrentPositionAsync({});
+  return {
+    lat: latitude,
+    lon: longitude,
   }
+
 }
-
-
-
 export default getLocationHandler;

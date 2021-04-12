@@ -5,27 +5,18 @@ import HourlyWeatherCity from '../components/Views/HourlyScreenView';
 import moment from "moment";
 
 const HourlyScreen = props => {
+ 
   const dispatch = useDispatch();
   const coordinate = useSelector(state => state.search.userCoordinate)
   const hourlyWeather = useSelector(state => state.search.cityHourlyWeather)
   const cityName = (useSelector(state => state.search.cityName))
   const Date = moment().format('MM, DD do')
-
   useEffect(
     () => {
       dispatch(Actions.GetCity(coordinate));
       dispatch(Actions.FetchingHourlyWeather(coordinate))
     }, [coordinate])
-
-    useEffect(() => {
-      const unsubscribe = props.navigation.addListener('tabPress', (e) => {
-          e.preventDefault();
-          dispatch(Actions.GetCoordinate());
-          console.log('tab')
-       });
-         return unsubscribe;
-    }, [props.navigation]);
-
+    
   return (
     <HourlyWeatherCity
       hourlyWeather={hourlyWeather}

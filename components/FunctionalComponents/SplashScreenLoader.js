@@ -1,11 +1,10 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { FetchingUserWeather } from '../../store/AppActions';
+import * as Actions from '../../store/AppActions';
 import * as SplashScreen from 'expo-splash-screen';
 import { useDispatch } from 'react-redux';
 import MainNavigator from '../../navigation/MainNavigator';
 import { NavigationContainer } from '@react-navigation/native';
-import tabBarOptions from '../UIComponents/tabBarOptions'
 export const SplashScreenLoader = () => {
   const [appIsReady, setAppIsReady] = useState(false);
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ export const SplashScreenLoader = () => {
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
-        await dispatch(FetchingUserWeather());
+        await dispatch(Actions.FetchingUserWeather());
         await dispatch(Actions.GetCoordinate());
         await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
@@ -38,8 +37,7 @@ export const SplashScreenLoader = () => {
     <NavigationContainer>
       <MainNavigator
         onLayout={onLayoutRootView}
-        screenOptions={tabBarOptions}
-      />
+         />
     </NavigationContainer>
 
   );

@@ -14,7 +14,7 @@ const DailyView = props => {
     <SafeAreaView style={styles.safearea}>
       <View style={styles.screen}>
         <View style={styles.cityName}>
-          <Text>{props.cityName}</Text>
+          <Text style={styles.cityText}>{props.cityName}</Text>
         </View>
         <FlatList data={props.WeatherCityDaily}
           keyExtractor={item => item.id}
@@ -37,8 +37,13 @@ const styles = StyleSheet.create({
     flex: 1
   },
   cityName: {
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 20,
+  },
+  cityText:{
+    fontSize:30,
+   fontWeight:'400'
   },
   safearea: {
     flex: 1

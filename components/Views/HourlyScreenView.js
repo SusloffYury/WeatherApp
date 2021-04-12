@@ -14,7 +14,8 @@ const HourlyView = props => {
     <SafeAreaView style={styles.safearea}>
       <View style={styles.screen}>
         <View style={styles.cityName}>
-          <Text>{`${props.cityName}-${props.Date}`}</Text>
+          <Text style = {styles.cityText}>
+            {`${props.cityName}  -  ${props.Date}`}</Text>
         </View>
         <FlatList data={props.hourlyWeather}
           keyExtractor={item => item.id}
@@ -38,8 +39,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   cityName: {
+    marginVertical:20,
+    marginLeft:15,
+   
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  cityText:{
+    fontSize:30,
+    fontWeight:'600',
   },
   safearea: {
     flex: 1
