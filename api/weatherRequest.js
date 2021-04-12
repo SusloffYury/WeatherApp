@@ -35,7 +35,7 @@ export const getDailyWeather = ({ lat, lon }) => {
 }
 
 export const getHourlyWeather = ({ lat, lon }) => {
-  return instance.get(`onecall?lat=${lat}&lon=${lon}&exclude={current,minutely, daily, alerts }&appid=${apiKey}`
+  return instance.get(`onecall?lat=${lat}&lon=${lon}&exclude={current,minutely,daily,alerts }&appid=${apiKey}`
   ).then(respond => {
     return respond.data
   })

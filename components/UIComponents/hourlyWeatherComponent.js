@@ -7,7 +7,7 @@ import {
     Image,
     Dimensions
 } from "react-native";
-import ErrorComponent from './errorCityComponent';
+
 
 const margin = 5;
 const itemWidth = (Dimensions.get('window').width)
@@ -57,7 +57,5 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '600'
     }
-
-
 })
 export default DailyWeather;

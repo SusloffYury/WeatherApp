@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider} from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import {SplashScreenLoader} from './components/SplashScreenLoader';
+import {SplashScreenLoader} from './components/FunctionalComponents/SplashScreenLoader';
 import SearchReducer from './store/AppReducer';
 import thunk from 'redux-thunk';
-import MainNavigator from './navigation/MainNavigator'
+
 
 const rootReducer = combineReducers({
   search: SearchReducer
