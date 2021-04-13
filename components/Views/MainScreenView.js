@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import {useSelector} from 'react-redux';
 import {
   View,
   TextInput,
@@ -14,6 +15,8 @@ import CityWeather from '../UIComponents/defaultCitiesComponent';
 import SearchingCityWeather from '../UIComponents/searchingCityComponent';
 
 const MainScreenView = props => {
+  const errorMessage = useSelector(state => state.search.error)
+  const weatherCity = useSelector(state => state.search.searchingCity)
   return (
     <SafeAreaView style={styles.safearea}>
       <View style={styles.screen}>
@@ -29,8 +32,8 @@ const MainScreenView = props => {
               placeholder='Enter city here..'
               onChangeText={value => props.setSearchTerm(value)}
               value={props.searchTerm}
-               />
-            {(props.weatherCity || props.errorMessage === '404') ?
+            />
+            {(weatherCity ||errorMessage === '404') ?
               <TouchableOpacity
                 onPress={props.ClearInputNull}>
                 <Ionicons
@@ -42,21 +45,17 @@ const MainScreenView = props => {
               : null}
           </View>
         </View>
-        {(props.errorMessage === '404' || props.weatherCity) ?
+        {(errorMessage === '404' || weatherCity) ?
           <SearchingCityWeather
             navigation={props.navigation}
             enterData={props.searchTerm}
-            error={props.errorMessage}
-            cityName={props.weatherCity.cityName}
-            temperature={props.weatherCity.temperature}
-            icon={props.weatherCity.icon}
-          />
+            />
           :
           <CityWeather
             data={props.weather}
             navigation={props.navigation}
-              />
-            
+           />
+
         }
       </View>
     </SafeAreaView>

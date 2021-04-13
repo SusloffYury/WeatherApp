@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 const DetailScreen = props => {
   const Date = moment().format('MMMM, DD')
@@ -22,7 +21,6 @@ const DetailScreen = props => {
       <Text>{detailCity[0].temperature}</Text>
       </View>
     </View>
-
   )
 }
 const styles = StyleSheet.create({

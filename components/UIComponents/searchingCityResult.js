@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   View,
   Text,
@@ -11,20 +12,21 @@ const margin = 7;
 const itemWidth = (Dimensions.get('window').width)
 
 const SearchingResult = props => {
+const weatherCity = useSelector(state => state.search.searchingCity)
   return (
     <View style={styles.screen}>
       <View style={styles.data}>
         <View style={styles.cityName}>
-          <Text style={styles.cityFont}>{props.cityName}</Text>
+          <Text style={styles.cityFont}>{weatherCity.cityName}</Text>
         </View>
         <View style={styles.cityTemp}>
-          <Text style={styles.tempFont}>{`${props.temperature} C`}</Text>
+          <Text style={styles.tempFont}>{`${weatherCity.temperature} C`}</Text>
         </View>
       </View>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={props.icon} />
+          source={weatherCity.icon} />
       </View>
     </View>
   )

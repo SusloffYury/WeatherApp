@@ -6,10 +6,8 @@ import DailyView from '../components/Views/DailyScreenView';
 const DailyScreen = props => {
   const dispatch = useDispatch();
   const coordinate = useSelector(state => state.search.userCoordinate)
-  const cityName = (useSelector(state => state.search.cityName))
-  const WeatherCityDaily = (useSelector(state =>
-    state.search.cityDailyWeather))
-     
+
+ 
   useEffect(
     () => {
       dispatch(Actions.GetCity(coordinate));
@@ -17,10 +15,8 @@ const DailyScreen = props => {
     }, [])
   
   return (
-    <DailyView
-      cityName={cityName}
-      WeatherCityDaily={WeatherCityDaily} />
+    <DailyView/>
+     
   )
 }
-
 export default DailyScreen;

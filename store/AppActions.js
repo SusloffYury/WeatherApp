@@ -4,15 +4,15 @@ import * as ActionCreators from './AppActionCreators';
 import GetUserCoordinate from '../api/getCoordinate';
 
 export const FetchingUserWeather = () => {
-  return (dispatch) => {
-    dispatch(ActionCreators.IsLoadingIndicator(true))
-    GetWeather
-      .getWeather().then(response => {
-        dispatch(ActionCreators.UserWeatherCity(response))
-        }).catch((error) => {
-        dispatch(ActionCreators.ErrorMessage(error))
-      });
+  return async (dispatch) => {
+    try {
+      const response = await GetWeather.getWeather();
+      dispatch(ActionCreators.IsLoadingIndicator(true))
+      dispatch(ActionCreators.UserWeatherCity(response))
       dispatch(ActionCreators.IsLoadingIndicator(false))
+    } catch (error) {
+      dispatch(ActionCreators.ErrorMessage(error))
+    };
   }
 }
 
@@ -21,8 +21,10 @@ export const SearchingCityWeather = cityName => {
     GetWeather
       .getCityWeather(cityName)
       .then(response => {
-       dispatch(ActionCreators.SearchingCity(response))
-       dispatch(ActionCreators.ErrorMessage(''))
+        dispatch(ActionCreators.IsLoadingIndicator(true))
+        dispatch(ActionCreators.SearchingCity(response))
+        dispatch(ActionCreators.IsLoadingIndicator(false))
+        dispatch(ActionCreators.ErrorMessage(''))
       }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(
@@ -42,12 +44,12 @@ export const FetchingDailyWeather = coordinate => {
           .ErrorMessage(
             error.response.data.cod))
       });
-    }
+  }
 }
 
 export const FetchingHourlyWeather = (coordinate) => {
   return (dispatch) => {
-     GetWeather
+    GetWeather
       .getHourlyWeather(coordinate)
       .then(response => {
         dispatch(ActionCreators.HourlyWeatherCity(response))
@@ -56,12 +58,12 @@ export const FetchingHourlyWeather = (coordinate) => {
           .ErrorMessage(
             error.response.data.cod))
       });
-   }
+  }
 }
 
 export const GetCity = (coordinate) => {
   return (dispatch) => {
-       GetWeather
+    GetWeather
       .getCityName(coordinate)
       .then(response => {
         dispatch(ActionCreators.GetCityName(response.name))
@@ -70,17 +72,17 @@ export const GetCity = (coordinate) => {
           .ErrorMessage(
             error.response.data.cod))
       })
-    }
+  }
 }
 
 export const GetCoordinate = () => {
   return (dispatch) => {
-     GetUserCoordinate()
+    GetUserCoordinate()
       .then(coordinate => {
         dispatch(ActionCreators.SetUserCoordinate(coordinate))
-       }).catch((error) => {
+      }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(error))
       });
-   }
   }
+}

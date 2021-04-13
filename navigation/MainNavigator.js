@@ -27,7 +27,6 @@ const MainNavigator = props => {
           tabBarIcon: ({ color }) => (
             <AntDesign name="calendar" size={26} color={color} />
           ),
-
         }}
       />
       <Tab.Screen

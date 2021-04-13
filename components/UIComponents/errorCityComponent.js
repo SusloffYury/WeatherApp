@@ -6,8 +6,8 @@ import {
   Image,
   Dimensions
 } from 'react-native';
-
 const itemWidth = (Dimensions.get('window').width);
+
 const ErrorComponent = props => {
   return (
     <View style={styles.screen}>

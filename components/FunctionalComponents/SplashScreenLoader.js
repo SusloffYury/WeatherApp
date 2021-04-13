@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useDispatch } from 'react-redux';
 import MainNavigator from '../../navigation/MainNavigator';
 import { NavigationContainer } from '@react-navigation/native';
+
 export const SplashScreenLoader = () => {
   const [appIsReady, setAppIsReady] = useState(false);
   const dispatch = useDispatch();

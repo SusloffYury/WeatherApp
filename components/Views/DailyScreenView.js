@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Text,
   View,
@@ -6,17 +7,26 @@ import {
   StyleSheet,
   SafeAreaView
 } from 'react-native';
+import NoDataComponent from '../UIComponents/noDataComponent';
 import DayliWeatherComponent from '../UIComponents/dailyWeatherComponent';
 import Colors from '../../constants/Colors';
 
 const DailyView = props => {
+  const WeatherCityDaily = (useSelector(state =>
+    state.search.cityDailyWeather))
+    const cityName = (useSelector(state => state.search.cityName))
+    const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
+    const ErrorMessage = useSelector(state => state.search.error)
   return (
     <SafeAreaView style={styles.safearea}>
-      <View style={styles.screen}>
+       {IsLoading ? (<IsLoadingIndicator />) :
+        (ErrorMessage==='400')?
+        (<NoDataComponent/>):
+     ( <View style={styles.screen}>
         <View style={styles.cityName}>
-          <Text style={styles.cityText}>{props.cityName}</Text>
+          <Text style={styles.cityText}>{cityName}</Text>
         </View>
-        <FlatList data={props.WeatherCityDaily}
+        <FlatList data={WeatherCityDaily}
           keyExtractor={item => item.id}
           renderItem={itemData =>
             <DayliWeatherComponent
@@ -24,7 +34,7 @@ const DailyView = props => {
               temperature={itemData.item.temp}
               icon={itemData.item.icon} />
           } />
-      </View >
+      </View >)}
     </SafeAreaView>
   )
 }
@@ -41,9 +51,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 20,
   },
-  cityText:{
-    fontSize:30,
-   fontWeight:'400'
+  cityText: {
+    fontSize: 30,
+    fontWeight: '400'
   },
   safearea: {
     flex: 1

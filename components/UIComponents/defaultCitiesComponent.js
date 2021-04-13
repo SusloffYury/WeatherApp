@@ -8,8 +8,9 @@ import {
   Image
 } from "react-native";
 import { useSelector } from 'react-redux';
-
+import { FetchingUserWeather } from '../../store/AppActions';
 import NoDataComponent from './noDataComponent';
+import IsLoadingIndicator from './isLoadingComponent';
 const margin = 17;
 const itemWidth = (Dimensions.get('window').width / 2) - (margin * 3);
 
@@ -38,17 +39,19 @@ const CityDefault = (props) => {
 const CityWeather = props => {
   const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
   const ErrorMessage = useSelector(state => state.search.error)
-  console.log(ErrorMessage)
+  const weather = useSelector(state => state.search.defaultCityWeather)
   return (
     <View>
       { (IsLoading) ?
-        (<IsLoading />) :
-
-        (ErrorMessage !== 'undefined') ?
+        (<IsLoadingIndicator />) :
+        (ErrorMessage === '400') ?
+          (<NoDataComponent />) :
           (<FlatList
-            data={props.data}
+            data={weather}
             keyExtractor={item => item.id}
             numColumns={2}
+            refreshing={IsLoading }
+            onRefresh={() => dispatch(FetchingUserWeather)}
             renderItem={itemData => (
               <CityDefault
                 navigation={props.navigation}
@@ -56,8 +59,7 @@ const CityWeather = props => {
                 temperature={itemData.item.temperature}
                 icon={itemData.item.icon}
               />)}
-          />) :
-          (<NoDataComponent />)
+          />)
       }
     </View>
   )

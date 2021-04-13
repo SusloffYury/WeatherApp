@@ -11,8 +11,6 @@ const margin = 5;
 const itemWidth = (Dimensions.get('window').width)
 
 const DailyWeather = props => {
-  const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
-  console.log(IsLoading)
   return (
     <View style={styles.screen}>
       <View style={styles.data}>
