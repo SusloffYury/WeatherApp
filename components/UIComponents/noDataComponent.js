@@ -7,54 +7,58 @@ import {
   Dimensions,
   Button
 } from 'react-native';
-const itemWidth = (Dimensions.get('window').width);
+import Color from '../../constants/Colors';
+import { verifyPermission } from '../../api/getCoordinate';
+const itemWidth = (Dimensions.get('window').width - 10);
+const itemHeight = (Dimensions.get('window').height - 10);
 
-const ErrorComponent = props => {
+const AccessDenied = props => {
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={require('../../assets/failIcon.png')} />
+        <View style={styles.containerText}>
+          <Text style={styles.largeText}>Data is not available</Text>
+          <Text style={styles.smallText}>Cannot determine your current location</Text>
+          <Button title='Allow access' color="black"
+            style={styles.Button}
+            onPress={() => verifyPermission()}
+          />
+        </View>
       </View>
-      <Text style={styles.largeText}>Data is not available</Text>
-      <Text style={styles.smallText}>Cannot determine your current location</Text>
-      <Button title ='Get Coordinate'
-      color="black"
-        style={styles.Button}
-        onPress={props.getCoordinate}
-      />
-      
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   screen: {
-    margin: 10,
-    flex: 1,
+    width: itemWidth,
+    height: itemHeight,
+    backgroundColor: Color.primary
   },
   imageContainer: {
-    width: itemWidth / 3,
-    height: itemWidth / 3,
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1
   },
   image: {
-    flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: itemWidth / 3,
+    height: itemWidth / 3,
 
   },
-  Button: {
-    justifyContent: 'center',
-    alignItems: 'center'
+  sign: {
+    marginVertical: 20,
   },
   largeText: {
-    marginVertical: 15,
+    fontSize: 30,
+    fontWeight: '400',
+    marginTop: 20,
   },
-  smallText:{
-    marginVertical:10,
-  }
+  smallText: {
+    fontSize: 15,
+    marginVertical: 10,
+  },
 })
-export default ErrorComponent;
+export default AccessDenied;

@@ -3,8 +3,8 @@ import { View } from "react-native";
 import { useSelector } from 'react-redux';
 import ErrorComponent from './errorCityComponent';
 import SearchingCity from './searchingCityResult';
-import NoDataComponent from './noDataComponent';
 import IsLoadingIndicator from './isLoadingComponent';
+
 const SearchingCityWeather = props => {
   const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
   const ErrorMessage = useSelector(state => state.search.error)

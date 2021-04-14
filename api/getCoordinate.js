@@ -4,7 +4,7 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
 
-const verifyPermission = async () => {
+export const verifyPermission = async () => {
   const { status } = await Permissions.askAsync(Permissions.LOCATION)
   if (status !== 'granted') {
     Alert.alert(

@@ -1,7 +1,17 @@
 import React, { useEffect } from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  Dimensions
+} from 'react-native';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
+import Color from '../constants/Colors';
+const margin = 10;
+const itemWidth = (Dimensions.get('window').width);
+const itemHeight = (Dimensions.get('window').height)
 
 const DetailScreen = props => {
   const Date = moment().format('MMMM, DD')
@@ -12,33 +22,49 @@ const DetailScreen = props => {
     .filter((item) => {
       return item.cityName === name
     })
-   return (
+  return (
     <View style={styles.screen}>
-      <View style ={styles.container}>
-      <Text>{Date}</Text>
-      <Text>{Time}</Text>
-      <Image style={styles.image} source={detailCity[0].icon} />
-      <Text>{detailCity[0].temperature}</Text>
+      <View style={styles.container}>
+        <Text style={styles.dateText}>{Date}</Text>
+        <Text style={styles.dateTime}>{Time}</Text>
+        <Image style={styles.image} source={detailCity[0].icon} />
+        <Text style={styles.temp}>{`${detailCity[0].temperature} C`}</Text>
       </View>
     </View>
   )
 }
 const styles = StyleSheet.create({
-  screen:{
-   flex:1
-   },
-   container:{
-    height:300,
-    width:300,
-    justifyContent:'center',
-    alignItems:'center'
-   },
-   image:{
-     width:100,
-     height:100,
-     justifyContent:'center',
-     alignItems:'center'
-   }
+  screen: {
+    width: itemWidth,
+    height: itemHeight,
+    backgroundColor: Color.primary
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: '600',
+    fontSize: 25,
+    flex: 0.7
+  },
+  image: {
+    width: itemWidth / 4,
+    height: itemHeight / 8.5,
+  },
+  dateText: {
+    fontWeight: '600',
+    fontSize: 35
+  },
+  dateTime: {
+    fontWeight: '600',
+    fontSize: 25,
+    marginVertical: 10,
+  },
+  temp: {
+    fontWeight: '600',
+    fontSize: 25,
+    marginVertical: 10,
+  }
+
 })
 
 export const DetailHeader = (navData) => {

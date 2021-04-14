@@ -10,7 +10,7 @@ import {
 const margin = 5;
 const itemWidth = (Dimensions.get('window').width)
 
-const DailyWeather = props => {
+const HourlyWeather = props => {
   return (
     <View style={styles.screen}>
       <View style={styles.data}>
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   }
 })
-export default DailyWeather;
+export default HourlyWeather;

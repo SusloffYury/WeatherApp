@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions
 } from 'react-native';
+import Color from '../../constants/Colors';
 const itemWidth = (Dimensions.get('window').width);
 
 const ErrorComponent = props => {
@@ -16,7 +17,10 @@ const ErrorComponent = props => {
           style={styles.image}
           source={require('../../assets/failIcon.png')} />
       </View>
-      <Text>No data for {props.enterData}</Text>
+      <View style={styles.sign}>
+        <Text style={styles.signText}>No data for {props.enterData}</Text>
+      </View>
+
     </View>
   )
 }
@@ -25,18 +29,29 @@ const styles = StyleSheet.create({
   screen: {
     margin: 10,
     flex: 1,
+    backgroundColor: Color.primary
   },
   imageContainer: {
-    width: itemWidth / 3,
-    height: itemWidth / 3,
+    marginVertical: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: Color.accent
   },
   image: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: itemWidth / 3,
+    height: itemWidth / 3,
+
+  },
+  sign: {
+    marginVertical: 20,
+  },
+  signText: {
+    marginLeft: 20,
+    fontSize: 40,
+    fontWeight: '400',
 
   }
+
 })
 
 export default ErrorComponent;

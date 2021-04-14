@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
   cityFont: {
     fontSize: 20,
     fontWeight: '600'
+  },
+  image:{
+    marginTop:30,
   }
 })
 export default DailyWeather;

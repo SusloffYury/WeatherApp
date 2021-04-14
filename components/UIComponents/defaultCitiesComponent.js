@@ -7,14 +7,16 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { FetchingUserWeather } from '../../store/AppActions';
 import NoDataComponent from './noDataComponent';
 import IsLoadingIndicator from './isLoadingComponent';
 const margin = 17;
 const itemWidth = (Dimensions.get('window').width / 2) - (margin * 3);
 
+
 const CityDefault = (props) => {
+
   const goToDetail = () => {
     props.navigation.navigate('DetailCity', { name: props.cityName })
   }
@@ -37,9 +39,10 @@ const CityDefault = (props) => {
   )
 }
 const CityWeather = props => {
-  const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
-  const ErrorMessage = useSelector(state => state.search.error)
-  const weather = useSelector(state => state.search.defaultCityWeather)
+  const dispatch = useDispatch();
+  const IsLoading = useSelector(state => state.search.IsLoadingIndicator);
+  const ErrorMessage = useSelector(state => state.search.error);
+  const weather = useSelector(state => state.search.defaultCityWeather);
   return (
     <View>
       { (IsLoading) ?
@@ -51,7 +54,7 @@ const CityWeather = props => {
             keyExtractor={item => item.id}
             numColumns={2}
             refreshing={IsLoading }
-            onRefresh={() => dispatch(FetchingUserWeather)}
+            onRefresh={() => dispatch(FetchingUserWeather())}
             renderItem={itemData => (
               <CityDefault
                 navigation={props.navigation}
