@@ -9,7 +9,6 @@ import {
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Color from '../constants/Colors';
-const margin = 10;
 const itemWidth = (Dimensions.get('window').width);
 const itemHeight = (Dimensions.get('window').height)
 

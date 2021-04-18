@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 20,
+    marginLeft:10,
   },
   cityText: {
     fontSize: 30,

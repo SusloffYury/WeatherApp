@@ -8,6 +8,7 @@ import MainScreenView from '../components/Views/MainScreenView';
 const MainScreen = props => {
   const [searchTerm, setSearchTerm] = useState('');
   const DebounceSearchTerm = useDebounce(searchTerm, 500);
+  
   const dispatch = useDispatch();
    
   useEffect(() => {
@@ -15,6 +16,7 @@ const MainScreen = props => {
       dispatch(Actions.SearchingCityWeather(DebounceSearchTerm))
     }
   }, [DebounceSearchTerm])
+  
   const clearInput = () => {
     dispatch(ClearInput())
     dispatch(ErrorMessage())

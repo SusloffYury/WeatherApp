@@ -10,7 +10,7 @@ import {
   IS_LOADING_INDICATOR
 } from './AppActionCreators';
 import WeatherIcons from '../models/Weather';
-
+import formatTemp from '../components/FunctionalComponents/formatTemp';
 const initialState = {
   defaultCityWeather: '',
   searchingCity: '',
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
               return {
                 id: index + 1,
                 cityName: el.name,
-                temperature: el.main.temp,
+                temperature: formatTemp(el.main.temp),
                 icon: WeatherIcons[el.weather[0].main],
               }
             })
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
     }
     case SEARCHING_CITY_WEATHER: {
       const weatherCity = {
-        temperature: action.weather.main.temp,
+        temperature: formatTemp(action.weather.main.temp),
         cityName: action.weather.name,
         icon: WeatherIcons[action.weather.weather[0].main],
       }
@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
         action.weather.daily.map((item, index) => {
           return {
             id: item.dt.toString(),
-            temp: item.temp.day,
+            temp: formatTemp(item.temp.day),
             icon: WeatherIcons[item.weather[0].main],
             date: moment().add(index, 'days').format('MMM Do'),
           }
@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
           return {
             id: item.dt.toString(),
             icon: WeatherIcons[item.weather[0].main],
-            temp: item.temp,
+            temp: formatTemp(item.temp),
             date: moment().add(index, 'hour').format('HH:00 Do'),
           }
         })

@@ -39,14 +39,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: margin,
   },
+  data:{
+    marginVertical:15
+  },
   imageContainer: {
-    marginVertical: margin + 10,
+    marginVertical: margin + 15,
     width: itemWidth / 5,
     height: itemWidth / 5,
   },
   cityName: {
     marginVertical: 10,
-    marginLeft: margin + 3,
+    marginLeft: margin + 7,
   },
   cityTemp: {
     marginLeft: 15

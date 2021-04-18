@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: margin,
-  },
+   },
   imageContainer: {
     marginHorizontal: margin,
     width: itemWidth / 5,
     height: itemWidth / 5,
   },
   cityName: {
-    marginVertical: 30,
+    marginVertical: 15,
   },
   cityTemp: {
     marginLeft: 5

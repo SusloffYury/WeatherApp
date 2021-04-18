@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: itemWidth / 5,
   },
   cityName: {
-    marginVertical: 10,
+    marginVertical:10,
   },
   cityTemp: {
     marginLeft: 5
