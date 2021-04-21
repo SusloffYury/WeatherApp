@@ -7,6 +7,7 @@ import {
   StyleSheet,
   SafeAreaView
 } from 'react-native';
+
 import NoDataComponent from '../UIComponents/noDataComponent';
 import DayliWeatherComponent from '../UIComponents/dailyWeatherComponent';
 import { FetchingDailyWeather } from '../../store/AppActions';
@@ -14,13 +15,14 @@ import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
 import Colors from '../../constants/Colors';
 
 const DailyView = props => {
-  
-  const WeatherCityDaily = (useSelector(state =>
-    state.search.cityDailyWeather))
-  const cityName = (useSelector(state => state.search.cityName))
-  const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
-  const ErrorMessage = useSelector(state => state.search.error)
-  const coordinate = useSelector(state => state.search.userCoordinate)
+  const{
+    cityDailyWeather:WeatherCityDaily,
+    cityName:cityName,
+    IsLoadingIndicator:IsLoading,
+    error:ErrorMessage,
+    userCoordinate:coordinate
+    }=useSelector(state=>state.search)
+
   const dispatch = useDispatch();
   
   return (

@@ -5,9 +5,12 @@ import HourlyWeatherCity from '../components/Views/HourlyScreenView';
 import NoInternet from '../components/UIComponents/internetNotAvailable';
 
 const HourlyScreen = props => {
-  const IsError = useSelector(state => state.search.error);
   const dispatch = useDispatch();
-  const coordinate = useSelector(state => state.search.userCoordinate)
+   const {
+    error: IsError,
+    userCoordinate: coordinate
+  } = useSelector(state => state.search)
+  
   useEffect(
     () => {
       dispatch(Actions.GetCity(coordinate));

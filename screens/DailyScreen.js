@@ -6,8 +6,11 @@ import NoInternet from '../components/UIComponents/internetNotAvailable';
 
 const DailyScreen = props => {
   const dispatch = useDispatch();
-  const coordinate = useSelector(state => state.search.userCoordinate)
-  const IsError = useSelector(state => state.search.error);
+  const {
+    userCoordinate: coordinate,
+    error: IsError
+  } = useSelector(state => state.search)
+ 
 
   useEffect(
     () => {
@@ -19,7 +22,6 @@ const DailyScreen = props => {
     (IsError === '404') ?
       <NoInternet /> :
       <DailyView />
-
   )
 }
 export default DailyScreen;

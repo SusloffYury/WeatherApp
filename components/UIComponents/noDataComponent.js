@@ -8,11 +8,11 @@ import {
   Button
 } from 'react-native';
 import Color from '../../constants/Colors';
-
+import { verifyPermission } from '../../api/getCoordinate';
 const itemWidth = (Dimensions.get('window').width - 10);
 const itemHeight = (Dimensions.get('window').height - 10);
 
-const NotInternet = props => {
+const AccessDenied = props => {
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
@@ -20,7 +20,12 @@ const NotInternet = props => {
           style={styles.image}
           source={require('../../assets/failIcon.png')} />
         <View style={styles.containerText}>
-          <Text style={styles.largeText}>Internet is not available</Text>
+          <Text style={styles.largeText}>Data is not available</Text>
+          <Text style={styles.smallText}>Cannot determine your current location</Text>
+          <Button title='Allow access' color="black"
+            style={styles.Button}
+            onPress={() => verifyPermission()}
+          />
         </View>
       </View>
     </View>
@@ -56,5 +61,4 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 })
-
-export default NotInternet;
+export default AccessDenied;
