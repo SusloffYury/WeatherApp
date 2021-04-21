@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FetchingUserWeather } from '../../store/AppActions';
 import NoDataComponent from './noDataComponent';
 import IsLoadingIndicator from './isLoadingComponent';
@@ -40,9 +40,11 @@ const CityDefault = (props) => {
 }
 const CityWeather = props => {
   const dispatch = useDispatch();
-  const IsLoading = useSelector(state => state.search.IsLoadingIndicator);
-  const ErrorMessage = useSelector(state => state.search.error);
-  const weather = useSelector(state => state.search.defaultCityWeather);
+  const {
+    IsLoadingIndicator: IsLoading,
+    error: ErrorMessage,
+    defaultCityWeather: weather } = useSelector(state => state.search)
+  
   return (
     <View>
       { (IsLoading) ?
@@ -53,7 +55,7 @@ const CityWeather = props => {
             data={weather}
             keyExtractor={item => item.id}
             numColumns={2}
-            refreshing={IsLoading }
+            refreshing={IsLoading}
             onRefresh={() => dispatch(FetchingUserWeather())}
             renderItem={itemData => (
               <CityDefault
@@ -85,11 +87,13 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+
+
   },
-  image: {
-    width: itemWidth / 5,
-    height: itemWidth / 5
-  },
+  // image: {
+  //   width: itemWidth / 5,
+  //   height: itemWidth / 5
+  // },
   temp: {
     marginVertical: 10,
     justifyContent: 'center',

@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
     flex: 0.7
   },
   image: {
-    width: itemWidth / 4,
-    height: itemHeight / 8.5,
+    width: itemWidth / 3.5,
+    height: itemHeight / 8,
+   
   },
   dateText: {
     fontWeight: '600',

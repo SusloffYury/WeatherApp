@@ -14,6 +14,7 @@ import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
 import Colors from '../../constants/Colors';
 
 const DailyView = props => {
+  
   const WeatherCityDaily = (useSelector(state =>
     state.search.cityDailyWeather))
   const cityName = (useSelector(state => state.search.cityName))
@@ -21,6 +22,7 @@ const DailyView = props => {
   const ErrorMessage = useSelector(state => state.search.error)
   const coordinate = useSelector(state => state.search.userCoordinate)
   const dispatch = useDispatch();
+  
   return (
     <SafeAreaView style={styles.safearea}>
       {IsLoading ? (<IsLoadingIndicator />) :
@@ -67,5 +69,4 @@ const styles = StyleSheet.create({
     flex: 1
   }
 })
-
 export default DailyView;

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginHorizontal: margin,
-    width: itemWidth / 5,
+    width: itemWidth / 5.3,
     height: itemWidth / 5,
   },
   cityName: {

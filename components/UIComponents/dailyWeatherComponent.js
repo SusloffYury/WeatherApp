@@ -32,7 +32,7 @@ const DailyWeather = props => {
 
 const styles = StyleSheet.create({
   screen: {
-    width: itemWidth,
+    width: itemWidth-margin*2,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: margin,

@@ -7,54 +7,51 @@ import {
   Dimensions,
   Button
 } from 'react-native';
-import Color from '../../constants/Colors';
-
 const itemWidth = (Dimensions.get('window').width - 10);
 const itemHeight = (Dimensions.get('window').height - 10);
-
-const NotInternet = props => {
+import Color from '../../constants/Colors'
+const NoInternet = props => {
   return (
     <View style={styles.screen}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={require('../../assets/failIcon.png')} />
+          </View>
         <View style={styles.containerText}>
           <Text style={styles.largeText}>Internet is not available</Text>
         </View>
       </View>
-    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    width: itemWidth,
+        screen: {
+        width: itemWidth,
     height: itemHeight,
     backgroundColor: Color.primary
   },
   imageContainer: {
-    justifyContent: 'center',
+        justifyContent: 'center',
     alignItems: 'center',
     flex: 1
   },
   image: {
-    width: itemWidth / 3,
+        width: itemWidth / 3,
     height: itemWidth / 3,
 
   },
   sign: {
-    marginVertical: 20,
+        marginVertical: 20,
   },
   largeText: {
-    fontSize: 30,
+        fontSize: 30,
     fontWeight: '400',
     marginTop: 20,
   },
   smallText: {
-    fontSize: 15,
+        fontSize: 15,
     marginVertical: 10,
   },
 })
-
-export default NotInternet;
+export default NoInternet;

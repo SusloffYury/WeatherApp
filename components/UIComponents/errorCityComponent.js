@@ -20,7 +20,6 @@ const ErrorComponent = props => {
       <View style={styles.sign}>
         <Text style={styles.signText}>No data for {props.enterData}</Text>
       </View>
-
     </View>
   )
 }
@@ -49,9 +48,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 40,
     fontWeight: '400',
-
   }
-
 })
 
 export default ErrorComponent;

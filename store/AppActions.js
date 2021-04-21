@@ -7,10 +7,8 @@ export const FetchingUserWeather = () => {
   return async (dispatch) => {
     try {
       const response = await GetWeather.getWeather();
-      dispatch(ActionCreators.IsLoadingIndicator(true))
       dispatch(ActionCreators.UserWeatherCity(response))
-      dispatch(ActionCreators.IsLoadingIndicator(false))
-    } catch (error) {
+      } catch (error) {
       dispatch(ActionCreators.ErrorMessage(error))
     };
   }
@@ -18,10 +16,10 @@ export const FetchingUserWeather = () => {
 
 export const SearchingCityWeather = cityName => {
   return async (dispatch) => {
+    dispatch(ActionCreators.IsLoadingIndicator(true))
     GetWeather
       .getCityWeather(cityName)
       .then(response => {
-        dispatch(ActionCreators.IsLoadingIndicator(true))
         dispatch(ActionCreators.SearchingCity(response))
         dispatch(ActionCreators.IsLoadingIndicator(false))
         dispatch(ActionCreators.ErrorMessage(''))
@@ -35,10 +33,12 @@ export const SearchingCityWeather = cityName => {
 
 export const FetchingDailyWeather = coordinate => {
   return (dispatch) => {
+    dispatch(ActionCreators.IsLoadingIndicator(true))
     GetWeather
       .getDailyWeather(coordinate)
       .then(response => {
         dispatch(ActionCreators.DailyWeatherCity(response))
+        dispatch(ActionCreators.IsLoadingIndicator(false))
       }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(
@@ -49,15 +49,18 @@ export const FetchingDailyWeather = coordinate => {
 
 export const FetchingHourlyWeather = (coordinate) => {
   return (dispatch) => {
+    dispatch(ActionCreators.IsLoadingIndicator(true))
     GetWeather
       .getHourlyWeather(coordinate)
       .then(response => {
-        dispatch(ActionCreators.HourlyWeatherCity(response))
-      }).catch((error) => {
+         dispatch(ActionCreators.HourlyWeatherCity(response))
+         dispatch(ActionCreators.IsLoadingIndicator(false))
+         }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(
             error.response.data.cod))
       });
+     
   }
 }
 

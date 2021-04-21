@@ -64,7 +64,7 @@ export default (state = initialState, action) => {
       }
     }
     case IS_LOADING_INDICATOR: {
-      return {
+         return {
         ...state,
         IsLoadingIndicator: action.indication
       }

@@ -11,7 +11,7 @@ const IsLoading = props => {
   return (
     <View style={styles.centeredView}>
       <View style={styles.modalView}>
-        <ActivityIndicator animating={true} color={Colors.accent} size="large" />
+        <ActivityIndicator animating={true} color={Colors.primary} size="large" />
       </View>
     </View>
   );

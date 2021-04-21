@@ -13,15 +13,17 @@ import Colors from '../../constants/Colors';
 import NoDataComponent from '../UIComponents/noDataComponent';
 import { FetchingHourlyWeather } from '../../store/AppActions';
 import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
+import IsLoading from '../UIComponents/isLoadingComponent';
+console.log(IsLoading)
 const HourlyView = props => {
+  const Date = moment().format('DD. MM. YYYY')
   const hourlyWeather = useSelector(state => state.search.cityHourlyWeather)
   const cityName = (useSelector(state => state.search.cityName))
-  const Date = moment().format('DD. MM. YYYY')
   const coordinate = useSelector(state => state.search.userCoordinate)
   const IsLoading = useSelector(state => state.search.IsLoadingIndicator)
   const ErrorMessage = useSelector(state => state.search.error)
   const dispatch = useDispatch();
-  return (
+   return (
     <SafeAreaView style={styles.safearea}>
       {IsLoading ? (<IsLoadingIndicator />) :
         (ErrorMessage === '400') ?
@@ -57,7 +59,6 @@ const styles = StyleSheet.create({
   cityName: {
     marginVertical: 20,
     marginLeft: 15,
-
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
