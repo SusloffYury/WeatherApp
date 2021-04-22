@@ -1,15 +1,10 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-  Button
+  Dimensions, Image, StyleSheet, Text, View
 } from 'react-native';
+import Color from '../../constants/Colors';
 const itemWidth = (Dimensions.get('window').width - 10);
 const itemHeight = (Dimensions.get('window').height - 10);
-import Color from '../../constants/Colors'
 const NoInternet = props => {
   return (
     <View style={styles.screen}>

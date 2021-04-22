@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import * as Actions from '../store/AppActions';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import HourlyWeatherCity from '../components/Views/HourlyScreenView';
 import NoInternet from '../components/UIComponents/internetNotAvailable';
+import HourlyWeatherCity from '../components/Views/HourlyScreenView';
+import * as Actions from '../store/AppActions';
 
 const HourlyScreen = props => {
   const dispatch = useDispatch();

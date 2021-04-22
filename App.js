@@ -15,7 +15,7 @@ const store = createStore(
 
 export default function App() {
   return (
-    <Provider store={store}>
+    <Provider store={store}> 
     <SplashScreenLoader/>
     </Provider>
 

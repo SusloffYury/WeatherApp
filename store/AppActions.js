@@ -1,7 +1,7 @@
 
+import GetUserCoordinate from '../api/getCoordinate';
 import * as GetWeather from '../api/weatherRequest';
 import * as ActionCreators from './AppActionCreators';
-import GetUserCoordinate from '../api/getCoordinate';
 
 export const FetchingUserWeather = () => {
   return async (dispatch) => {

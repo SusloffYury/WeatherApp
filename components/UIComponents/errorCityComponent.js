@@ -1,10 +1,6 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions
+  Dimensions, Image, StyleSheet, Text, View
 } from 'react-native';
 import Color from '../../constants/Colors';
 const itemWidth = (Dimensions.get('window').width);

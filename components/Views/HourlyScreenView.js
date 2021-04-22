@@ -17,17 +17,16 @@ import IsLoading from '../UIComponents/isLoadingComponent';
 console.log(IsLoading)
 const HourlyView = props => {
   const Date = moment().format('DD. MM. YYYY')
-const{
-  cityHourlyWeather:hourlyWeather,
-  cityName:cityName,
-  userCoordinate:coordinate,
-  IsLoadingIndicator:IsLoading,
-  error:ErrorMessage
-}=useSelector(state=>state.search)
+  const {
+    cityHourlyWeather: hourlyWeather,
+    cityName: cityName,
+    userCoordinate: coordinate,
+    IsLoadingIndicator: IsLoading,
+    error: ErrorMessage
+  } = useSelector(state => state.search)
 
-  
   const dispatch = useDispatch();
-   return (
+  return (
     <SafeAreaView style={styles.safearea}>
       {IsLoading ? (<IsLoadingIndicator />) :
         (ErrorMessage === '400') ?

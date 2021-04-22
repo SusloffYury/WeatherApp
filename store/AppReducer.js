@@ -1,16 +1,23 @@
-import {
-  USER_CITY,
-  HOURLY_WEATHER,
-  DAILY_WEATHER,
-  USER_COORDINATE,
-  SEARCHING_CITY_WEATHER,
-  CLEAR_INPUT,
-  ERROR_MESSAGE,
-  CITY_NAME,
-  IS_LOADING_INDICATOR
-} from './AppActionCreators';
-import WeatherIcons from '../models/Weather';
+import moment from "moment";
 import formatTemp from '../components/FunctionalComponents/formatTemp';
+import WeatherIcons from '../models/Weather';
+import {
+  CITY_NAME, CLEAR_INPUT, DAILY_WEATHER,
+
+
+
+  ERROR_MESSAGE, HOURLY_WEATHER,
+
+
+
+
+
+
+  IS_LOADING_INDICATOR, SEARCHING_CITY_WEATHER, USER_CITY,
+
+
+  USER_COORDINATE
+} from './AppActionCreators';
 const initialState = {
   defaultCityWeather: '',
   searchingCity: '',
@@ -21,7 +28,6 @@ const initialState = {
   cityName: '',
   IsLoadingIndicator: false,
 }
-import moment from "moment";
 
 export default (state = initialState, action) => {
   switch (action.type) {

@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
+import moment from 'moment';
+import React from 'react';
 import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  Dimensions
+  Dimensions, Image,
+  StyleSheet, Text,
+  View
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
 import Color from '../constants/Colors';
 const itemWidth = (Dimensions.get('window').width);
 const itemHeight = (Dimensions.get('window').height)

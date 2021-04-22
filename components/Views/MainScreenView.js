@@ -1,15 +1,15 @@
 
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Platform,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import {
+  Platform,
+
+  SafeAreaView, StyleSheet, TextInput,
+
+
+  TouchableOpacity, View
+} from 'react-native';
+import { useSelector } from 'react-redux';
 import Colors from '../../constants/Colors';
 import CityWeather from '../UIComponents/defaultCitiesComponent';
 import SearchingCityWeather from '../UIComponents/searchingCityComponent';

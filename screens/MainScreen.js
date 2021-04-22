@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import * as Actions from '../store/AppActions'
 import { useDispatch, useSelector } from 'react-redux';
-import { ClearInput, ErrorMessage } from '../store/AppActionCreators';
 import useDebounce from '../components/FunctionalComponents/useDebounce';
-import MainScreenView from '../components/Views/MainScreenView';
 import NoInternet from '../components/UIComponents/internetNotAvailable';
+import MainScreenView from '../components/Views/MainScreenView';
+import { ClearInput, ErrorMessage } from '../store/AppActionCreators';
+import * as Actions from '../store/AppActions';
 
 const MainScreen = props => {
   const [searchTerm, setSearchTerm] = useState('');

@@ -1,11 +1,6 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions
+  Dimensions, Image, StyleSheet, Text, View
 } from "react-native";
 const margin = 5;
 const itemWidth = (Dimensions.get('window').width)

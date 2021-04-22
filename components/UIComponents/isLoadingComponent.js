@@ -1,11 +1,10 @@
 import React from 'react';
-import Colors from '../../constants/Colors';
 import {
   ActivityIndicator,
-  Modal,
   StyleSheet,
   View
 } from 'react-native';
+import Colors from '../../constants/Colors';
 
 const IsLoading = props => {
   return (
