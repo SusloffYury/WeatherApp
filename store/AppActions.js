@@ -1,9 +1,9 @@
 
-import { FileSystemSessionType } from 'expo-file-system';
+import * as FileSystem from 'expo-file-system';
 import GetUserCoordinate from '../api/getCoordinate';
 import * as GetWeather from '../api/weatherRequest';
 import * as ActionCreators from './AppActionCreators';
-
+import DaySecond from '../constants/Time';
 export const FetchingUserWeather = () => {
   return async (dispatch) => {
     try {
@@ -90,22 +90,24 @@ export const GetCoordinate = () => {
       });
   }
 }
-export const FileSystem = (coordinate) => {
-  return  (dispatch) => {
-         GetWeather.getYesterdayWeather(coordinate)
-      .then( async (file) => {
-         try{
-          await FileSystem.writeAsStringAsync(FileSystem.documentDirectory+'datas.json', JSON.stringify(file));
-          console.log('succes');
-          let readFile = await FileSystem.readAsStringAsync(FileSystem.documentDirectory+'datas.json');
-            dispatch(ActionCreators.LoadingFile(readFile))
-        }
-        catch(err){
-          console.log(err);
-        }
-            }).catch((error) => {
-        dispatch(ActionCreators
-          .ErrorMessage(error))
-      });
+export const FileSystems = (coordinate) => {
+  const PATH = FileSystem.documentDirectory + 'datas.json';
+  return async (dispatch) => {
+    const fileExist = FileSystem.getInfoAsync(PATH)
+    if (fileExist) {
+      const readFile = await FileSystem.readAsStringAsync(PATH);
+      const parseFile = JSON.parse(readFile);
+      console.log(parseFile)
+      if (new Date(parseFile.current.dt * 1000) === new Date(Date.now() - DaySecond)) {
+        dispatch(ActionCreators.LoadingFile(parseFile))
+        return;
+      }
+    }
+    GetWeather.getYesterdayWeather(coordinate).then(async (newFile) => {
+      await FileSystem.writeAsStringAsync(PATH, newFile);
+    }).catch((error) => {
+      dispatch(ActionCreators
+        .ErrorMessage(error))
+    });
   }
 }

@@ -9,13 +9,13 @@ const HourlyScreen = props => {
   const {
     error: IsError,
     userCoordinate: coordinate,
-    LoadingFile:file,
-  } = useSelector(state => state.search)
-  console.log(file)
+    } = useSelector(state => state.search)
+  
+
    useEffect(
     () => {
       dispatch(Actions.GetCity(coordinate));
-      dispatch(Actions.FileSystem(coordinate));
+      dispatch(Actions.FileSystems(coordinate));
       dispatch(Actions.FetchingHourlyWeather(coordinate))
     }, [coordinate])
 

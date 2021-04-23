@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-
+import DaySecond from '../constants/Time'
 const instance = axios.create({
   baseURL: 'http://api.openweathermap.org/data/2.5/'
 });
@@ -42,11 +42,10 @@ export const getHourlyWeather = ({ lat, lon }) => {
   })
 }
 export const getYesterdayWeather = ({ lat, lon }) => {
-  const daySecond = 86400000;
-  const time = Math.floor(Date.now()- daySecond/1000 ) ;
-  return instance.get(`onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${apiKey}`
+
+   const time = Math.floor((Date.now()- DaySecond)/1000 ) ;
+   return instance.get(`onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${apiKey}`
     ).then(respond => {
-    console.log(respond.data)
-        return respond.data
+           return respond
   })
 }

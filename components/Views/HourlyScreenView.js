@@ -14,7 +14,7 @@ import NoDataComponent from '../UIComponents/noDataComponent';
 import { FetchingHourlyWeather } from '../../store/AppActions';
 import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
 import IsLoading from '../UIComponents/isLoadingComponent';
-console.log(IsLoading)
+
 const HourlyView = props => {
   const Date = moment().format('DD. MM. YYYY')
   const {
@@ -22,9 +22,11 @@ const HourlyView = props => {
     cityName: cityName,
     userCoordinate: coordinate,
     IsLoadingIndicator: IsLoading,
-    error: ErrorMessage
+    error: ErrorMessage,
+    LoadingFile:file,
   } = useSelector(state => state.search)
-
+  
+  console.log(`file ${file}`)
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.safearea}>
