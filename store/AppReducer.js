@@ -3,20 +3,10 @@ import formatTemp from '../components/FunctionalComponents/formatTemp';
 import WeatherIcons from '../models/Weather';
 import {
   CITY_NAME, CLEAR_INPUT, DAILY_WEATHER,
-
-
-
   ERROR_MESSAGE, HOURLY_WEATHER,
-
-
-
-
-
-
   IS_LOADING_INDICATOR, SEARCHING_CITY_WEATHER, USER_CITY,
-
-
-  USER_COORDINATE
+  USER_COORDINATE,
+  LOADING_FILE,
 } from './AppActionCreators';
 const initialState = {
   defaultCityWeather: '',
@@ -27,9 +17,11 @@ const initialState = {
   error: '',
   cityName: '',
   IsLoadingIndicator: false,
+  LoadingFile:'',
 }
 
 export default (state = initialState, action) => {
+  
   switch (action.type) {
     case USER_CITY: {
       return {
@@ -112,11 +104,16 @@ export default (state = initialState, action) => {
         userCoordinate: action.userCoordinate
       }
     }
-
     case CITY_NAME: {
       return {
         ...state,
         cityName: action.cityName
+      }
+    }
+    case LOADING_FILE: {
+      return {
+        ...state,
+        LoadingFile: action.fileName
       }
     }
     default: return state;

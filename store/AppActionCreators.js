@@ -8,10 +8,16 @@ export const HOURLY_WEATHER = 'HOURLY_WEATHER';
 export const CLEAR_INPUT = 'CLEAR_INPUT';
 export const CITY_NAME = 'CITY_NAME';
 export const IS_LOADING_INDICATOR = 'IS_LOADING_INDICATOR';
+export const LOADING_FILE = 'LOADING_FILE';
 
 export const ClearInput = () => {
   return {
     type: CLEAR_INPUT, weather: '',
+  }
+}
+export const LoadingFile = file => {
+  return {
+    type: LOADING_FILE, fileName: file,
   }
 }
 

@@ -6,14 +6,16 @@ import * as Actions from '../store/AppActions';
 
 const HourlyScreen = props => {
   const dispatch = useDispatch();
-   const {
+  const {
     error: IsError,
-    userCoordinate: coordinate
+    userCoordinate: coordinate,
+    LoadingFile:file,
   } = useSelector(state => state.search)
-  
-  useEffect(
+  console.log(file)
+   useEffect(
     () => {
       dispatch(Actions.GetCity(coordinate));
+      dispatch(Actions.FileSystem(coordinate));
       dispatch(Actions.FetchingHourlyWeather(coordinate))
     }, [coordinate])
 

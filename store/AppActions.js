@@ -1,4 +1,5 @@
 
+import { FileSystemSessionType } from 'expo-file-system';
 import GetUserCoordinate from '../api/getCoordinate';
 import * as GetWeather from '../api/weatherRequest';
 import * as ActionCreators from './AppActionCreators';
@@ -8,7 +9,7 @@ export const FetchingUserWeather = () => {
     try {
       const response = await GetWeather.getWeather();
       dispatch(ActionCreators.UserWeatherCity(response))
-      } catch (error) {
+    } catch (error) {
       dispatch(ActionCreators.ErrorMessage(error))
     };
   }
@@ -53,14 +54,14 @@ export const FetchingHourlyWeather = (coordinate) => {
     GetWeather
       .getHourlyWeather(coordinate)
       .then(response => {
-         dispatch(ActionCreators.HourlyWeatherCity(response))
-         dispatch(ActionCreators.IsLoadingIndicator(false))
-         }).catch((error) => {
+        dispatch(ActionCreators.HourlyWeatherCity(response))
+        dispatch(ActionCreators.IsLoadingIndicator(false))
+      }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(
             error.response.data.cod))
       });
-     
+
   }
 }
 
@@ -84,6 +85,25 @@ export const GetCoordinate = () => {
       .then(coordinate => {
         dispatch(ActionCreators.SetUserCoordinate(coordinate))
       }).catch((error) => {
+        dispatch(ActionCreators
+          .ErrorMessage(error))
+      });
+  }
+}
+export const FileSystem = (coordinate) => {
+  return  (dispatch) => {
+         GetWeather.getYesterdayWeather(coordinate)
+      .then( async (file) => {
+         try{
+          await FileSystem.writeAsStringAsync(FileSystem.documentDirectory+'datas.json', JSON.stringify(file));
+          console.log('succes');
+          let readFile = await FileSystem.readAsStringAsync(FileSystem.documentDirectory+'datas.json');
+            dispatch(ActionCreators.LoadingFile(readFile))
+        }
+        catch(err){
+          console.log(err);
+        }
+            }).catch((error) => {
         dispatch(ActionCreators
           .ErrorMessage(error))
       });

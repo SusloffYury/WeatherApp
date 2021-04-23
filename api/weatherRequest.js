@@ -30,14 +30,23 @@ export const getCityName = ({ lat, lon }) => {
 export const getDailyWeather = ({ lat, lon }) => {
   return instance.get(`onecall?lat=${lat}&lon=${lon}&exclude={current,minutely,hourly,alerts }&appid=${apiKey}`
   ).then(respond => {
-    return respond.data
+     return respond.data
   })
 }
 
 export const getHourlyWeather = ({ lat, lon }) => {
   return instance.get(`onecall?lat=${lat}&lon=${lon}&exclude={current,minutely,daily,alerts }&appid=${apiKey}`
   ).then(respond => {
-    return respond.data
+     return respond.data
+    
   })
 }
-
+export const getYesterdayWeather = ({ lat, lon }) => {
+  const daySecond = 86400000;
+  const time = Math.floor(Date.now()- daySecond/1000 ) ;
+  return instance.get(`onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${apiKey}`
+    ).then(respond => {
+    console.log(respond.data)
+        return respond.data
+  })
+}
