@@ -53,7 +53,6 @@ const HourlyPresenter = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = navigation
       .addListener('focus', () => {  
-        
         navigation.dangerouslyGetParent().setOptions({
             headerTitle: tit + " - " + date,
             headerTitleAlign: "left",
