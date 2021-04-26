@@ -42,10 +42,9 @@ export const getHourlyWeather = ({ lat, lon }) => {
   })
 }
 export const getYesterdayWeather = ({ lat, lon }) => {
-
-   const time = Math.floor((Date.now()- DaySecond)/1000 ) ;
-   return instance.get(`onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${apiKey}`
+   const time = Math.floor((Date.now() - 86400000)/1000);
+     return instance.get(`onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${apiKey}`
     ).then(respond => {
-           return respond
+            return respond
   })
 }

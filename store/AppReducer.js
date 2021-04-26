@@ -8,6 +8,7 @@ import {
   USER_COORDINATE,
   LOADING_FILE,
 } from './AppActionCreators';
+
 const initialState = {
   defaultCityWeather: '',
   searchingCity: '',
@@ -17,11 +18,11 @@ const initialState = {
   error: '',
   cityName: '',
   IsLoadingIndicator: false,
-  LoadingFile:'',
+  LoadingFile: '',
 }
 
 export default (state = initialState, action) => {
-  
+
   switch (action.type) {
     case USER_CITY: {
       return {
@@ -62,7 +63,7 @@ export default (state = initialState, action) => {
       }
     }
     case IS_LOADING_INDICATOR: {
-         return {
+      return {
         ...state,
         IsLoadingIndicator: action.indication
       }
@@ -111,9 +112,18 @@ export default (state = initialState, action) => {
       }
     }
     case LOADING_FILE: {
+      const YesterDayData =
+        action.fileName.data.hourly.map((item, index) => {
+          return {
+            id: item.dt.toString() + 1,
+            icon: WeatherIcons[item.weather[0].main],
+            temp: formatTemp(item.temp),
+            date: moment().subtract(1, 'day').add(index, 'hour').format('HH:00 Do'),
+          }
+        })
       return {
         ...state,
-        LoadingFile: action.fileName
+        LoadingFile: YesterDayData
       }
     }
     default: return state;

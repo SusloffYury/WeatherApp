@@ -91,23 +91,32 @@ export const GetCoordinate = () => {
   }
 }
 export const FileSystems = (coordinate) => {
-  const PATH = FileSystem.documentDirectory + 'datas.json';
+  const PATH = FileSystem.documentDirectory + 'data.json';
   return async (dispatch) => {
-    const fileExist = FileSystem.getInfoAsync(PATH)
-    if (fileExist) {
-      const readFile = await FileSystem.readAsStringAsync(PATH);
-      const parseFile = JSON.parse(readFile);
-      console.log(parseFile)
-      if (new Date(parseFile.current.dt * 1000) === new Date(Date.now() - DaySecond)) {
+    const  fileExist =  await FileSystem.getInfoAsync(PATH)
+    if (fileExist.exists) {
+      try {
+        const readFile = await FileSystem.readAsStringAsync(PATH);
+        const parseFile = JSON.parse(readFile);
         dispatch(ActionCreators.LoadingFile(parseFile))
-        return;
+         } catch (error) {
+        console.log(error)
       }
+      if (new Date(parseFile.data.current.dt * 1000) === new Date(Date.now() - DaySecond)) {
+       
+      }
+    } else {
+      GetWeather.getYesterdayWeather(coordinate)
+        .then(async (newFile) => {
+          FileSystem.writeAsStringAsync(PATH, JSON.stringify(newFile));
+          const readFile = await JSON.parse(FileSystem.readAsStringAsync(PATH))
+          console.log(`Read ${readFile}`)
+          dispatch(ActionCreators.LoadingFile(newFile))
+
+        }).catch((error) => {
+          dispatch(ActionCreators
+            .ErrorMessage(error))
+        });
     }
-    GetWeather.getYesterdayWeather(coordinate).then(async (newFile) => {
-      await FileSystem.writeAsStringAsync(PATH, newFile);
-    }).catch((error) => {
-      dispatch(ActionCreators
-        .ErrorMessage(error))
-    });
   }
 }

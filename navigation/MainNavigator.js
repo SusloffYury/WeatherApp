@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import DailyScreen from '../screens/DailyScreen';
-import HourlyScreen from '../screens/HourlyScreen';
+import HourlyNavigator from './HourlyNavigator';
 import CityNav from './ViewDetail';
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-const Tab = createBottomTabNavigator();
 
+const Tab = createBottomTabNavigator();
 const MainNavigator = props => {
   return (
     <Tab.Navigator
@@ -31,7 +32,7 @@ const MainNavigator = props => {
       />
       <Tab.Screen
         name='Hourly'
-        component={HourlyScreen}
+        component={HourlyNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="md-time-outline" size={26} color={color} />

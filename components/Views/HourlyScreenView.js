@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Text,
@@ -7,41 +7,33 @@ import {
   FlatList,
   SafeAreaView
 } from 'react-native';
-import moment from "moment";
 import HourlyWeatherCity from '../UIComponents/hourlyWeatherComponent';
 import Colors from '../../constants/Colors';
 import NoDataComponent from '../UIComponents/noDataComponent';
-import { FetchingHourlyWeather } from '../../store/AppActions';
+import * as Actions from '../../store/AppActions';
 import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
 import IsLoading from '../UIComponents/isLoadingComponent';
 
 const HourlyView = props => {
-  const Date = moment().format('DD. MM. YYYY')
+   const dispatch = useDispatch();
   const {
     cityHourlyWeather: hourlyWeather,
     cityName: cityName,
     userCoordinate: coordinate,
     IsLoadingIndicator: IsLoading,
     error: ErrorMessage,
-    LoadingFile:file,
+   
   } = useSelector(state => state.search)
-  
-  console.log(`file ${file}`)
-  const dispatch = useDispatch();
-  return (
+   return (
     <SafeAreaView style={styles.safearea}>
       {IsLoading ? (<IsLoadingIndicator />) :
         (ErrorMessage === '400') ?
           (<NoDataComponent />) :
           (<View style={styles.screen}>
-            <View style={styles.cityName}>
-              <Text style={styles.cityText}>
-                {`${cityName}  -  ${Date}`}</Text>
-            </View>
-            <FlatList data={hourlyWeather}
+             <FlatList data={hourlyWeather}
               keyExtractor={item => item.id}
               refreshing={IsLoading}
-              onRefresh={() => dispatch(FetchingHourlyWeather(coordinate))}
+              onRefresh={() => dispatch(Actions.FetchingHourlyWeather(coordinate))}
               renderItem={itemData =>
                 <HourlyWeatherCity
                   date={itemData.item.date}
