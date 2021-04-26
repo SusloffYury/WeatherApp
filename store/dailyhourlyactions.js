@@ -28,38 +28,23 @@ export const getYesterday = (lat, lon) => {
   return async (dispatch, getState) => {
 
     var RNFS = require('react-native-fs');
+    var path;
     if(
       Platform.OS === 'android'
     )
     {
       console.log('s');
-      var path = RNFS.ExternalDirectoryPath + '/test.txt';
-      RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
-        .then((success) => {
-          console.log('FILE WRITTEN!');
-          console.log(RNFS.ExternalDirectoryPath);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      path = RNFS.ExternalDirectoryPath + 'datas.json';
     }
     else{
-      var path = RNFS.LibraryDirectoryPath + '/test.txt';
-      RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
-      .then((success) => {
-        console.log('FILE WRITTEN!');
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      path = RNFS.DocumentDirectoryPath + 'datas.json';
     }
     
-
-
-    let file = await FileSystem.getInfoAsync(FileSystem.documentDirectory+'datas.json')
-    if(file.exists){
+    let exists =  await RNFS.exists(path);
+    
+    if(exists){
       console.log('d');
-      let a = await FileSystem.readAsStringAsync(FileSystem.documentDirectory+'datas.json');
+      let a = await RNFS.readFile(path);
       let JSONFormatted = JSON.parse(a);
       if(new Date(JSONFormatted.current.dt*1000).getDate() == new Date(Date.now() - 86400000).getDate()){
         const Hourly = JSONFormatted.hourly;
@@ -107,7 +92,7 @@ export const getYesterday = (lat, lon) => {
               );
           });
           try{
-            await FileSystem.writeAsStringAsync(FileSystem.documentDirectory+'datas.json', JSON.stringify(resData));
+            await RNFS.writeFile(path, JSON.stringify(resData));
             console.log('succes');  
           }
           catch(err){
@@ -149,9 +134,9 @@ export const getYesterday = (lat, lon) => {
             );
         });
         try{
-          await FileSystem.writeAsStringAsync(FileSystem.documentDirectory+'datas.json', JSON.stringify(resData));
+          await RNFS.writeFile(path, JSON.stringify(resData));
           console.log('succes');
-          let a = await FileSystem.readAsStringAsync(FileSystem.documentDirectory+'datas.json');
+          let a = await RNFS.readFile(path);
          
           
         }
