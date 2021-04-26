@@ -23,6 +23,7 @@
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
     "react-native-file-access": "^1.5.0",
+    "react-native-file-viewer": "^2.1.4",
     "react-native-fs": "^2.17.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-paper": "^4.8.0",

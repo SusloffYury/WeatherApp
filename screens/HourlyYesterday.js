@@ -3,7 +3,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import moment from "moment";
 import {
-    Alert
+    Alert, Button, Text
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../store/dailyhourlyactions";
@@ -77,8 +77,10 @@ const HourlyYesterday = ({ navigation }) => {
       setisLoading(false);
     }
   };
+
   const tit = useSelector((state) => state.dailyhoutly.City.name);
   const date = moment(Date.now()-86400000).format("MMMM, Do");
+  
   useEffect(() => {
     const unsubscribe = navigation
       .addListener('focus', () => {  
@@ -86,6 +88,14 @@ const HourlyYesterday = ({ navigation }) => {
         navigation.dangerouslyGetParent().setOptions({
             headerTitle: tit + " - " + date,
             headerTitleAlign: "left",
+            headerRight: () => (
+              <Button
+                onPress= {() => dispatch(dailyhourlyactions.openFile())}
+                title="Info"
+                color="#ded"
+                style={{marginVertical: 50}}
+              />
+            ),
         });
     });
 

@@ -3,7 +3,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import moment from "moment";
 import {
-    Alert
+    Alert, Text
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../../store/dailyhourlyactions";
@@ -56,6 +56,9 @@ const HourlyPresenter = ({ navigation }) => {
         navigation.dangerouslyGetParent().setOptions({
             headerTitle: tit + " - " + date,
             headerTitleAlign: "left",
+            headerRight: () => (
+              <Text> </Text>
+            ),
         });
     });
 

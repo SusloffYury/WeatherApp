@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system';
+import FileViewer from 'react-native-file-viewer';
 import { Platform } from "react-native";
 
 import City from "../models/City";
@@ -24,6 +25,40 @@ export const selectDay = (index) => {
   }
 }
 
+export const openFile = () => {
+  return async (dispatch, getState) => {
+
+    var RNFS = require('react-native-fs');
+    var path;
+    if(
+      Platform.OS === 'android'
+    )
+    {
+      console.log('android');
+      path = RNFS.DocumentDirectoryPath + 'datas.json';
+    }
+    else{
+      path = RNFS.DocumentDirectoryPath + 'datas.json';
+    }
+    
+    let exists =  await RNFS.exists(path);
+    
+    if(exists){
+      FileViewer.open(path)
+      .then(() => {
+        console.log('succesfully opened');
+      })
+      .catch(error => {
+        console.log(error);
+        console.log(path);
+      });
+      }
+      else{
+        alert('Error')
+      }
+  }
+}
+
 export const getYesterday = (lat, lon) => {
   return async (dispatch, getState) => {
 
@@ -34,7 +69,7 @@ export const getYesterday = (lat, lon) => {
     )
     {
       console.log('s');
-      path = RNFS.ExternalDirectoryPath + 'datas.json';
+      path = RNFS.DocumentDirectoryPath + 'datas.json';
     }
     else{
       path = RNFS.DocumentDirectoryPath + 'datas.json';
