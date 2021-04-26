@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system';
+import { Platform } from "react-native";
 
 import City from "../models/City";
 import * as Network from 'expo-network';
@@ -27,14 +28,32 @@ export const getYesterday = (lat, lon) => {
   return async (dispatch, getState) => {
 
     var RNFS = require('react-native-fs');
-    var path = RNFS.DocumentDirectoryPath + '/test.txt';
-    RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
+    if(
+      Platform.OS === 'android'
+    )
+    {
+      console.log('s');
+      var path = RNFS.ExternalDirectoryPath + '/test.txt';
+      RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
+        .then((success) => {
+          console.log('FILE WRITTEN!');
+          console.log(RNFS.ExternalDirectoryPath);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+    else{
+      var path = RNFS.LibraryDirectoryPath + '/test.txt';
+      RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
       .then((success) => {
         console.log('FILE WRITTEN!');
       })
       .catch((err) => {
         console.log(err.message);
       });
+    }
+    
 
 
     let file = await FileSystem.getInfoAsync(FileSystem.documentDirectory+'datas.json')
