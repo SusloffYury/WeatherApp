@@ -34,7 +34,6 @@ export const openFile = () => {
       Platform.OS === 'android'
     )
     {
-      console.log('android');
       path = RNFS.DocumentDirectoryPath + 'datas.json';
     }
     else{
@@ -68,7 +67,6 @@ export const getYesterday = (lat, lon) => {
       Platform.OS === 'android'
     )
     {
-      console.log('s');
       path = RNFS.DocumentDirectoryPath + 'datas.json';
     }
     else{
@@ -170,10 +168,7 @@ export const getYesterday = (lat, lon) => {
         });
         try{
           await RNFS.writeFile(path, JSON.stringify(resData));
-          console.log('succes');
           let a = await RNFS.readFile(path);
-         
-          
         }
         catch(err){
           console.log(err);
