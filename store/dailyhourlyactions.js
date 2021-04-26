@@ -44,7 +44,7 @@ export const openFile = () => {
     let exists =  await RNFS.exists(path);
     
     if(exists){
-      FileViewer.open(path)
+      FileViewer.open(path, { showOpenWithDialog: true })
       .then(() => {
         console.log('succesfully opened');
       })
@@ -177,6 +177,7 @@ export const getYesterday = (lat, lon) => {
         }
         catch(err){
           console.log(err);
+          
         }
         finally{
     
