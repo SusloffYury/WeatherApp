@@ -1,10 +1,9 @@
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { createMaterialTopTabNavigator, createStackN } from '@react-navigation/material-top-tabs';
 import { useSelector } from 'react-redux';
 import HourlyScreen from '../screens/HourlyScreen';
 import YesterdayScreen from '../screens/YesterdayScreen';
-import { createStackNavigator } from '@react-navigation/stack';
-import moment from "moment";
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();

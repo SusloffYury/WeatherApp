@@ -22,10 +22,8 @@ const DailyView = props => {
     error:ErrorMessage,
     userCoordinate:coordinate
     }=useSelector(state=>state.search)
-
   const dispatch = useDispatch();
-  
-  return (
+    return (
     <SafeAreaView style={styles.safearea}>
       {IsLoading ? (<IsLoadingIndicator />) :
         (ErrorMessage === '400')

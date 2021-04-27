@@ -45,6 +45,7 @@ export const getYesterdayWeather = ({ lat, lon }) => {
    const time = Math.floor((Date.now() - DaySecond));
      return instance.get(`onecall/timemachine?lat=${lat}&lon=${lon}&dt=${time}&appid=${apiKey}`
     ).then(respond => {
+      console.log(respond)
             return respond
   })
 }
