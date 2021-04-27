@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import DailyScreen from '../screens/DailyScreen';
+import DayliNavigator from './DayliNavigator';
 import HourlyNavigator from './HourlyNavigator';
 import CityNav from './ViewDetail';
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -23,7 +22,7 @@ const MainNavigator = props => {
       />
       <Tab.Screen
         name='Daily'
-        component={DailyScreen}
+        component={DayliNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <AntDesign name="calendar" size={26} color={color} />

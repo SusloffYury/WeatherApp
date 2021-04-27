@@ -32,10 +32,7 @@ const DailyView = props => {
           ?
           (<NoDataComponent />) :
           (<View style={styles.screen}>
-            <View style={styles.cityName}>
-              <Text style={styles.cityText}>{cityName}</Text>
-            </View>
-            <FlatList data={WeatherCityDaily}
+              <FlatList data={WeatherCityDaily}
               keyExtractor={item => item.id}
               refreshing={IsLoading}
               onRefresh={() => dispatch(FetchingDailyWeather(coordinate))}

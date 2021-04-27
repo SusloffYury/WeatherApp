@@ -1,3 +1,3 @@
 export default{
-     daySecond:86400000,
+     daySecond:8640000,
 }

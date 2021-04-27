@@ -4,6 +4,7 @@ import GetUserCoordinate from '../api/getCoordinate';
 import * as GetWeather from '../api/weatherRequest';
 import * as ActionCreators from './AppActionCreators';
 import DaySecond from '../constants/Time';
+import EqualDate from '../components/FunctionalComponents/equalDate';
 export const FetchingUserWeather = () => {
   return async (dispatch) => {
     try {
@@ -93,30 +94,28 @@ export const GetCoordinate = () => {
 export const FileSystems = (coordinate) => {
   const PATH = FileSystem.documentDirectory + 'data.json';
   return async (dispatch) => {
-    const  fileExist =  await FileSystem.getInfoAsync(PATH)
+    let parseFile;
+    const fileExist = await FileSystem.getInfoAsync(PATH)
     if (fileExist.exists) {
       try {
         const readFile = await FileSystem.readAsStringAsync(PATH);
-        const parseFile = JSON.parse(readFile);
+        parseFile = JSON.parse(readFile);
         dispatch(ActionCreators.LoadingFile(parseFile))
-         } catch (error) {
+      } catch (error) {
         console.log(error)
       }
-      if (new Date(parseFile.data.current.dt * 1000) === new Date(Date.now() - DaySecond)) {
-       
+      if (EqualDate(parseFile.data.current.dt)) {
+        GetWeather.getYesterdayWeather(coordinate)
+          .then(async (newFile) => {
+            FileSystem.writeAsStringAsync(PATH, JSON.stringify(newFile));
+            const readFile = await JSON.parse(FileSystem.readAsStringAsync(PATH))
+            console.log(`Read ${readFile}`)
+            dispatch(ActionCreators.LoadingFile(readFile))
+          }).catch((error) => {
+            dispatch(ActionCreators
+              .ErrorMessage(error))
+          });
       }
-    } else {
-      GetWeather.getYesterdayWeather(coordinate)
-        .then(async (newFile) => {
-          FileSystem.writeAsStringAsync(PATH, JSON.stringify(newFile));
-          const readFile = await JSON.parse(FileSystem.readAsStringAsync(PATH))
-          console.log(`Read ${readFile}`)
-          dispatch(ActionCreators.LoadingFile(newFile))
-
-        }).catch((error) => {
-          dispatch(ActionCreators
-            .ErrorMessage(error))
-        });
     }
   }
 }
