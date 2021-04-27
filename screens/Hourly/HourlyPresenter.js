@@ -127,7 +127,6 @@ const HourlyPresenter = ({ navigation }) => {
     Cities1={Cities1}
     getPerm={getPerm}
     np = {np}
-    Cities2={Cities2}
     />
     )
 };

@@ -17,8 +17,6 @@ const HourlyYesterday = ({ navigation }) => {
   const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch();
   const Cities = useSelector((state) => state.dailyhoutly.Yesterday);
-  const SelectedDay = useSelector((state)=> state.dailyhoutly.SelectedDay)
-  const np = useSelector((state) => state.weather.notPerm);
   var Cities1 = Cities;
   const getPerm = async () => {
     const { status, permissions } = await Permissions.askAsync(

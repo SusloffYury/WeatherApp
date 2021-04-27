@@ -1,30 +1,25 @@
-import React from "react";
-import { Platform, TextPropTypes } from "react-native";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {
+  CardStyleInterpolators, createStackNavigator
+} from "@react-navigation/stack";
 import moment from "moment";
-
+import React from "react";
+import { Platform } from "react-native";
 import { useSelector } from "react-redux";
 import CitiesPresenter, {
-  screenOptions as CitiesScreenOptions,
+  screenOptions as CitiesScreenOptions
 } from "../screens/Cities/CitiesPresenter";
-import HourlyYesterday, {
-  screenOptions as HYScreenOptions,
-} from '../screens/HourlyYesterday';
 import DailyPresenter, {
-  screenOptions as DailyScreenOptions,
+  screenOptions as DailyScreenOptions
 } from "../screens/Daily/DailyPresenter";
-import HourlyPresenter, {
-  screenOptions as HourlyScreenOptions,
-} from "../screens/Hourly/HourlyPresenter";
+import HourlyPresenter from "../screens/Hourly/HourlyPresenter";
+import HourlyYesterday from '../screens/HourlyYesterday';
 import SelectedCityScreen, {
-  screenOptions as SelectedCityScreenOptions,
+  screenOptions as SelectedCityScreenOptions
 } from "../screens/SelectedCityScreen";
+
 
 const WeatherStack = createStackNavigator();
 

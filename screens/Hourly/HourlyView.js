@@ -21,7 +21,6 @@ const HourlyView = (props) => {
         pTRHandler,
         Cities,
         getPerm,
-        Cities2,
         np
     }=props
     
@@ -49,7 +48,7 @@ const HourlyView = (props) => {
         </View>
       ) : !np ? (
         <NoData onPress={getPerm} />
-      ): (
+      ) : (
         <View style={styles.container}>
         <Image source={require("../../assets/NoData.png")} />
         <Text style={styles.Name}>Cannot get an update</Text>

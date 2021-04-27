@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { StyleSheet, Text, View, Image, FlatList, Alert } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, Image, FlatList} from "react-native";
 
 
 import HeaderInput from "../../components/HeaderInput";
@@ -16,7 +16,6 @@ export default function CitiesScreen({ navigation, ...props}) {
         Cities,
         Citiy,
         loading,
-        loaded,
         searchText,
         isRefreshing,
         changeTextHandler,
@@ -45,7 +44,6 @@ export default function CitiesScreen({ navigation, ...props}) {
                 cityName={itemData.item.name}
                 temp={itemData.item.temperature}
                 wicon={itemData.item.wcondition}
-                isRefresh={isRefreshing}
                 onClick={() => {
                     SelectCityHandler(itemData.item);
                 }}

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import {
-  Text,
-  View,
   Image,
-  TouchableOpacity,
-  StyleSheet
+  StyleSheet, 
+  Text,
+  TouchableOpacity, 
+  View
 } from "react-native";
+
 
 const NoData = (props) =>{
     return(

@@ -1,7 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import FileViewer from 'react-native-file-viewer';
 import { Platform } from "react-native";
-
 import City from "../models/City";
 import * as Network from 'expo-network';
 
@@ -16,45 +15,22 @@ const apik = "2ecc8cdc74d9e8fdb6f53505f378ea75";
 
 export const selectDay = (index) => {
   return async (dispatch) =>{
-    if(index===0){
-      dispatch({ type: SELECT_DAY, day: 'Yesterday' });
-    }
-    else{
       dispatch({ type: SELECT_DAY, Day: 'Today' });
-    }
   }
 }
 
 export const openFile = () => {
   return async (dispatch, getState) => {
-
     var RNFS = require('react-native-fs');
-    var path;
-    if(
-      Platform.OS === 'android'
-    )
-    {
-      path = RNFS.DocumentDirectoryPath + 'datas.json';
-    }
-    else{
-      path = RNFS.DocumentDirectoryPath + 'datas.json';
-    }
-    
+    var path = Platform.OS.toLowerCase() === 'android' ? RNFS.ExternalDirectoryPath + 'datas.json' : RNFS.DocumentDirectoryPath + 'datas.json';
     let exists =  await RNFS.exists(path);
-    
     if(exists){
-      FileViewer.open(path, { showOpenWithDialog: true })
+      FileViewer.open(path, { showOpenWithDialog: true, showAppsSuggestions: true})
       .then(() => {
         console.log('succesfully opened');
-      })
-      .catch(error => {
-        console.log(error);
         console.log(path);
-      });
-      }
-      else{
-        alert('Error')
-      }
+      })
+    }
   }
 }
 
@@ -62,21 +38,12 @@ export const getYesterday = (lat, lon) => {
   return async (dispatch, getState) => {
 
     var RNFS = require('react-native-fs');
-    var path;
-    if(
-      Platform.OS === 'android'
-    )
-    {
-      path = RNFS.DocumentDirectoryPath + 'datas.json';
-    }
-    else{
-      path = RNFS.DocumentDirectoryPath + 'datas.json';
-    }
+    var path = Platform.OS.toLowerCase() === 'android' ? RNFS.ExternalDirectoryPath + 'datas.json' : RNFS.DocumentDirectoryPath + 'datas.json';
     
     let exists =  await RNFS.exists(path);
     
     if(exists){
-      console.log('d');
+      
       let a = await RNFS.readFile(path);
       let JSONFormatted = JSON.parse(a);
       if(new Date(JSONFormatted.current.dt*1000).getDate() == new Date(Date.now() - 86400000).getDate()){

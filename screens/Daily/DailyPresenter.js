@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   Alert,
 } from "react-native";
@@ -11,6 +10,7 @@ import * as dailyhourlyactions from "../../store/dailyhourlyactions";
 import DailyView from './DailyView';
 
 export default function DailyPresenter ({ navigation }) {
+
   const [location, setLocation] = useState(null);
   const [ps, setPs] = useState(false);
   const [isLoading, setisLoading] = useState(false);
@@ -60,8 +60,6 @@ export default function DailyPresenter ({ navigation }) {
       setLocation(loca);
     } catch {
       setPs(false);
-      Cities1 = [];
-      console.log(Cities1);
       setisLoading(false);
       return;
     }
@@ -75,7 +73,7 @@ export default function DailyPresenter ({ navigation }) {
       setisLoading(false);
       return;
     } catch (error) {
-      Alert.alert("Error1", "Something went wrong during network call", [
+      Alert.alert("Error", "Something went wrong during network call", [
         { text: "Okay" },
       ]);
     } finally {
@@ -97,13 +95,10 @@ export default function DailyPresenter ({ navigation }) {
 
   return (
     <DailyView 
-        location={location}
         ps={ps}
         isLoading={isLoading}
         pTRHandler={pTRHandler}
-        getLoc={getLoc}
         Cities={Cities}
-        Cities1={Cities1}
         getPerm={getPerm}
         />
   );

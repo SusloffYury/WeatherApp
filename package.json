@@ -20,6 +20,7 @@
     "expo-updates": "~0.5.4",
     "moment": "^2.29.1",
     "react": "16.13.1",
+    "react-devtools": "^4.12.4",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
     "react-native-file-access": "^1.5.0",
@@ -35,6 +36,7 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.3",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {

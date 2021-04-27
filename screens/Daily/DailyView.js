@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
   View,
-  Alert,
-  Image,
   FlatList,
-  TouchableOpacity,
 } from "react-native";
 import moment from "moment";
 
@@ -98,4 +93,5 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
+
 export default DailyView;
