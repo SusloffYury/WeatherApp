@@ -1,18 +1,15 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
-  Text,
-  View,
   FlatList,
-  StyleSheet,
-  SafeAreaView
+  SafeAreaView, StyleSheet, View
 } from 'react-native';
-
-import NoDataComponent from '../UIComponents/noDataComponent';
-import DayliWeatherComponent from '../UIComponents/dailyWeatherComponent';
-import { FetchingDailyWeather } from '../../store/AppActions';
-import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
 import Colors from '../../constants/Colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { FetchingDailyWeather } from '../../store/AppActions';
+import DayliWeatherComponent from '../UIComponents/dailyWeatherComponent';
+import IsLoadingIndicator from '../UIComponents/isLoadingComponent';
+import NoDataComponent from '../UIComponents/noDataComponent';
+
 
 const DailyView = props => {
   const{
@@ -60,7 +57,7 @@ const styles = StyleSheet.create({
   },
   cityText: {
     fontSize: 30,
-    fontWeight: '400'
+    
   },
   safearea: {
     flex: 1

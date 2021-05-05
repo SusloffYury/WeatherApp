@@ -3,10 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import {
   Platform,
-
   SafeAreaView, StyleSheet, TextInput,
-
-
   TouchableOpacity, View
 } from 'react-native';
 import { useSelector } from 'react-redux';

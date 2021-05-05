@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions, Image, StyleSheet, Text, View
 } from "react-native";
 const margin = 5;
-const itemWidth = (Dimensions.get('window').width)
+const window = Dimensions.get("window");
+
 
 const DailyWeather = props => {
+  const [dimension, setDimesions] = useState({ window });
+
+  useEffect(() => {
+    const onChange = ({ window }) => {
+      setDimesions({ window })
+    }
+    Dimensions.addEventListener('change', onChange);
+    return () => {
+      Dimensions.removeEventListener('change', onChange)
+    }
+  })
+
+  const itemWidth = dimension.window.width;
   return (
-    <View style={styles.screen}>
+    <View style={{
+      width: itemWidth - margin * 2,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginHorizontal: margin,
+    }}>
       <View style={styles.data}>
         <View style={styles.cityName}>
           <Text style={styles.cityFont}>{props.date}</Text>
@@ -16,7 +35,11 @@ const DailyWeather = props => {
           <Text style={styles.tempFont}>{`${props.temperature} C`}</Text>
         </View>
       </View>
-      <View style={styles.imageContainer}>
+      <View style={{
+        marginHorizontal: margin,
+        width: itemWidth / 5,
+        height: itemWidth / 5,
+      }}>
         <Image
           style={styles.image}
           source={props.icon} />
@@ -26,17 +49,6 @@ const DailyWeather = props => {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    width: itemWidth-margin*2,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: margin,
-   },
-  imageContainer: {
-    marginHorizontal: margin,
-    width: itemWidth / 5,
-    height: itemWidth / 5,
-  },
   cityName: {
     marginVertical: 15,
   },
@@ -50,8 +62,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600'
   },
-  image:{
-    marginTop:30,
+  image: {
+    marginTop: 30,
   }
 })
 export default DailyWeather;

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Dimensions, Image, StyleSheet, Text, View
 } from 'react-native';
+
 import Color from '../../constants/Colors';
 const itemWidth = (Dimensions.get('window').width - 10);
 const itemHeight = (Dimensions.get('window').height - 10);

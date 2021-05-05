@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Dimensions, Image, StyleSheet, Text, View
 } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Color from '../../constants/Colors';
 const itemWidth = (Dimensions.get('window').width);
 
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: Color.accent
-  },
+    },
   image: {
     width: itemWidth / 3,
     height: itemWidth / 3,

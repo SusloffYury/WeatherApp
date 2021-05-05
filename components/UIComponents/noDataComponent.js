@@ -8,7 +8,9 @@ import {
   Button
 } from 'react-native';
 import Color from '../../constants/Colors';
+
 import { verifyPermission } from '../../api/getCoordinate';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 const itemWidth = (Dimensions.get('window').width - 10);
 const itemHeight = (Dimensions.get('window').height - 10);
 

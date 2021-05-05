@@ -24,8 +24,9 @@ const HourlyView = props => {
     error: ErrorMessage,
    
   } = useSelector(state => state.search)
+ 
    return (
-    <SafeAreaView style={styles.safearea}>
+     <SafeAreaView style={styles.safearea}>
       {IsLoading ? (<IsLoadingIndicator />) :
         (ErrorMessage === '400') ?
           (<NoDataComponent />) :

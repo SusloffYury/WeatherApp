@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,11 +11,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FetchingUserWeather } from '../../store/AppActions';
 import NoDataComponent from './noDataComponent';
 import IsLoadingIndicator from './isLoadingComponent';
-const margin = 17;
-const itemWidth = (Dimensions.get('window').width / 2) - (margin * 3);
 
+const margin = 17;
+let itemWidth;
+let itemHeight;
+const window = Dimensions.get("window");
 
 const CityDefault = (props) => {
+  const [dimension, setDimesions] = useState({ window });
+  
+  useEffect(() => {
+    const onChange = ({ window }) => {
+      setDimesions({ window })
+    }
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  });
+  itemWidth = (dimension.window.width / 2) - (margin * 3)
+  itemHeight = (dimension.window.height) - (margin * 5.5)
 
   const goToDetail = () => {
     props.navigation.navigate('DetailCity', { name: props.cityName })
@@ -23,12 +38,20 @@ const CityDefault = (props) => {
 
   return (
     <TouchableOpacity onPress={goToDetail}>
-      <View style={styles.screen}>
+      <View style={{
+        width: (itemWidth > itemHeight)
+          ? itemHeight : itemWidth,
+        height: (itemWidth > itemHeight)
+          ? itemHeight - margin * 1.8 :
+          itemWidth - margin * 1.8,
+        borderWidth: 1,
+        borderColor: '#0a0a0a', margin: margin * 0.9,
+      }}>
         <View style={styles.city}>
           <Text>{props.cityName}</Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image style={styles.image}
+          <Image style={{ width: itemWidth / 5, height: itemWidth / 5 }}
             source={props.icon} />
         </View>
         <View style={styles.temp}>
@@ -44,7 +67,7 @@ const CityWeather = props => {
     IsLoadingIndicator: IsLoading,
     error: ErrorMessage,
     defaultCityWeather: weather } = useSelector(state => state.search)
-  
+
   return (
     <View>
       { (IsLoading) ?
@@ -70,14 +93,7 @@ const CityWeather = props => {
   )
 }
 const styles = StyleSheet.create({
-  screen: {
-    width: itemWidth,
-    height: itemWidth - margin * 1.8,
-    borderWidth: 1,
-    borderColor: '#0a0a0a',
-    margin: margin * 0.9,
 
-  },
   city: {
     marginVertical: 10,
     justifyContent: 'center',
@@ -87,13 +103,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-
-
   },
-  // image: {
-  //   width: itemWidth / 5,
-  //   height: itemWidth / 5
-  // },
   temp: {
     marginVertical: 10,
     justifyContent: 'center',

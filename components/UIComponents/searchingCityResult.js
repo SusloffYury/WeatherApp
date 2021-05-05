@@ -12,18 +12,31 @@ const margin = 7;
 const itemWidth = (Dimensions.get('window').width)
 
 const SearchingResult = props => {
-const weatherCity = useSelector(state => state.search.searchingCity)
+  const weatherCity = useSelector(state => state.search.searchingCity)
   return (
-    <View style={styles.screen}>
+    <View style={{
+      width: itemWidth,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginHorizontal: margin,
+      marginLeft:80,
+    }}>
       <View style={styles.data}>
-        <View style={styles.cityName}>
+        <View style={{
+          marginVertical: 10,
+          marginLeft: margin + 7,
+        }}>
           <Text style={styles.cityFont}>{weatherCity.cityName}</Text>
         </View>
         <View style={styles.cityTemp}>
           <Text style={styles.tempFont}>{`${weatherCity.temperature} C`}</Text>
         </View>
       </View>
-      <View style={styles.imageContainer}>
+      <View style={{
+        marginVertical: margin + 15,
+        width: itemWidth / 5,
+        height: itemWidth / 5,
+      }}>
         <Image
           style={styles.image}
           source={weatherCity.icon} />
@@ -33,23 +46,9 @@ const weatherCity = useSelector(state => state.search.searchingCity)
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    width: itemWidth,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: margin,
-  },
-  data:{
-    marginVertical:15
-  },
-  imageContainer: {
-    marginVertical: margin + 15,
-    width: itemWidth / 5,
-    height: itemWidth / 5,
-  },
-  cityName: {
-    marginVertical: 10,
-    marginLeft: margin + 7,
+
+  data: {
+    marginVertical: 15
   },
   cityTemp: {
     marginLeft: 15
