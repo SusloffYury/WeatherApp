@@ -20,9 +20,7 @@ const HourlyScreen = props => {
     }, [coordinate])
 
   return (
-    (IsError === '404') ?
-      <NoInternet /> :
-      <HourlyWeatherCity />
+        <HourlyWeatherCity />
   )
 }
 export default HourlyScreen;

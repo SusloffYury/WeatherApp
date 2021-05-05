@@ -19,9 +19,7 @@ const DailyScreen = props => {
     }, [])
 
   return (
-    (IsError === '404') ?
-      <NoInternet /> :
-      <DailyView />
+       <DailyView />
   )
 }
 export default DailyScreen;

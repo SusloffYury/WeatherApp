@@ -91,41 +91,41 @@ export const GetCoordinate = () => {
   }
 }
 export const FileSystems = (coordinate) => {
-   console.log(coordinate)
   const PATH = FileSystem.documentDirectory + 'data.json';
-
   return async (dispatch) => {
-    GetWeather.getYesterdayWeather(coordinate)
-    .then(async (newFile) => {
-      FileSystem.writeAsStringAsync(PATH, JSON.stringify(newFile));
-               dispatch(ActionCreators.LoadingFile(newFile))
-    }).catch((error) => {
-      dispatch(ActionCreators
-        .ErrorMessage(error))
-    });
+    const fileExist = (await FileSystem.getInfoAsync(PATH)).exists
     let parseFile;
-    const fileExist = await FileSystem.getInfoAsync(PATH)
-    console.log(fileExist.exists)
-    if (true) {
+    if (fileExist) {
       try {
         const readFile = await FileSystem.readAsStringAsync(PATH);
-        // parseFile = JSON.parse(readFile);
-        // dispatch(ActionCreators.LoadingFile(parseFile))
+        parseFile = JSON.parse(readFile);
+        //  dispatch(ActionCreators.LoadingFile(parseFile))
       } catch (error) {
         console.log(error)
       }
-      if (EqualDate(true)) {
-        GetWeather.getYesterdayWeather(coordinate)
-          .then(async (newFile) => {
-            FileSystem.writeAsStringAsync(PATH, JSON.stringify(newFile));
-            const readFile = await JSON.parse(FileSystem.readAsStringAsync(PATH))
-            console.log(`Read ${readFile}`)
-            dispatch(ActionCreators.LoadingFile(newFile))
-          }).catch((error) => {
-            dispatch(ActionCreators
-              .ErrorMessage(error))
-          });
+      if (EqualDate(parseFile.data.current.dt)) {
+        dispatch(ActionCreators.LoadingFile(parseFile))
+        return;
+        
+      } else {
+        try {
+          const response = await GetWeather.getYesterdayWeather(coordinate)
+          FileSystem.writeAsStringAsync(PATH, JSON.stringify(response))
+          dispatch(ActionCreators.LoadingFile(response));
+        } catch (error) {
+          dispatch(ActionCreators
+            .ErrorMessage(error))
+        }
       }
-       }
+      return;
     }
+    try {
+      const response = await GetWeather.getYesterdayWeather(coordinate)
+      FileSystem.writeAsStringAsync(PATH, JSON.stringify(response))
+      dispatch(ActionCreators.LoadingFile(response));
+    } catch (error) {
+      dispatch(ActionCreators
+        .ErrorMessage(error))
+    }
+  }
 }
