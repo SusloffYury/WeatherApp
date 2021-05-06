@@ -42,8 +42,8 @@ const CityDefault = (props) => {
         width: (itemWidth > itemHeight)
           ? itemHeight : itemWidth,
         height: (itemWidth > itemHeight)
-          ? itemHeight - margin * 1.8 :
-          itemWidth - margin * 1.8,
+          ? itemHeight - margin * 1.6 :
+          itemWidth - margin * 1.6,
         borderWidth: 1,
         borderColor: '#0a0a0a', margin: margin * 0.9,
       }}>
@@ -51,7 +51,7 @@ const CityDefault = (props) => {
           <Text>{props.cityName}</Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image style={{ width: itemWidth / 5, height: itemWidth / 5 }}
+          <Image style={{ width: itemWidth / 4.6, height: itemWidth / 4.8 }}
             source={props.icon} />
         </View>
         <View style={styles.temp}>

@@ -1,22 +1,41 @@
 
 import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Platform,
   SafeAreaView, StyleSheet, TextInput,
-  TouchableOpacity, View
+  TouchableOpacity, View, Dimensions, Image
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import Colors from '../../constants/Colors';
 import CityWeather from '../UIComponents/defaultCitiesComponent';
 import SearchingCityWeather from '../UIComponents/searchingCityComponent';
+let itemHeight;
+let itemWidth;
+const window = Dimensions.get("window");
 
 const MainScreenView = props => {
+  const [dimensions, setDimesions] = useState({ window })
+  useEffect(() => {
+    const onChange = ({ window }) => {
+      setDimesions({ window })
+    }
+    Dimensions.addEventListener('change', onChange)
+    return () => {
+      Dimensions.removeEventListener('change', onChange)
+    };
+  })
+  itemWidth = dimensions.window.width;
+  itemHeight = dimensions.window.height;
 
   const {
     error: errorMessage,
     searchingCity: weatherCity
   } = useSelector(state => state.search)
+
+  const goToImagePicker = () => {
+    props.navigation.navigate('ImagePicker')
+  }
 
   return (
     <SafeAreaView style={styles.safearea}>
@@ -55,9 +74,20 @@ const MainScreenView = props => {
           <CityWeather
             data={props.weather}
             navigation={props.navigation}
-          />
-
-        }
+          />}
+        <View style={{
+          position: 'absolute',
+          left: itemWidth / 2.5,
+          top: itemHeight / 1.3,
+          zIndex: 3,
+        }}>
+          <TouchableOpacity style={styles.touch}
+            onPress={() => goToImagePicker()}>
+            <Image source={require('../../assets/add-photo.png')}
+              style={styles.ImageAdd}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -85,6 +115,18 @@ const styles = StyleSheet.create({
   },
   safearea: {
     flex: 1,
+  },
+  safearea: {
+    flex: 1
+  },
+  ImageAdd: {
+    width: 50,
+    height: 50,
+
+  },
+  touch: {
+    width: 70,
+    height: 70,
   }
 })
 export default MainScreenView;

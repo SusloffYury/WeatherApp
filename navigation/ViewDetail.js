@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen, { NavigateStyle } from '../screens/MainScreen';
 import DetailScreen, { DetailHeader } from '../screens/DetailScreen';
-
+import ImagePickerView  from '../components/Views/ImagePickerView';
 const Stack = createStackNavigator();
 const CityNav = props => {
   useEffect(() => {
@@ -24,6 +24,10 @@ const CityNav = props => {
         component={DetailScreen} 
         options ={DetailHeader}
         />
+         <Stack.Screen
+        name="ImagePicker"
+        component={ImagePickerView} 
+         />
     </Stack.Navigator>
   )
 }
