@@ -9,6 +9,7 @@ export const CLEAR_INPUT = 'CLEAR_INPUT';
 export const CITY_NAME = 'CITY_NAME';
 export const IS_LOADING_INDICATOR = 'IS_LOADING_INDICATOR';
 export const LOADING_FILE = 'LOADING_FILE';
+export const IMAGE_PICK = 'IMAGE_PICK';
 
 export const ClearInput = () => {
   return {
@@ -50,7 +51,6 @@ export const SearchingCity = weatherParams => {
     type: SEARCHING_CITY_WEATHER, weather: weatherParams
   }
 }
-
 export const DailyWeatherCity = weatherParams => {
   return {
     type: DAILY_WEATHER, weather: weatherParams
@@ -64,5 +64,10 @@ export const HourlyWeatherCity = weatherParams => {
 export const SetUserCoordinate = coordinate => {
   return {
     type: USER_COORDINATE, userCoordinate: coordinate
+  }
+}
+export const SaveImage = imageURI => {
+  return {
+    type: IMAGE_PICK, imageURI: imageURI
   }
 }

@@ -19,6 +19,7 @@ const initialState = {
   cityName: '',
   IsLoadingIndicator: false,
   LoadingFile: '',
+  ImagePick:'',
 }
 
 export default (state = initialState, action) => {
