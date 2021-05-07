@@ -30,11 +30,13 @@ export default (state = initialState, action) => {
         defaultCityWeather:
           action.weather
             .list.map((el, index) => {
-              return {
-                id: index + 1,
-                cityName: el.name,
-                temperature: formatTemp(el.main.temp),
-                icon: WeatherIcons[el.weather[0].main],
+              if (index <= 7) {
+                return {
+                  id: index + 1,
+                  cityName: el.name,
+                  temperature: formatTemp(el.main.temp),
+                  icon: WeatherIcons[el.weather[0].main],
+                }
               }
             })
       }

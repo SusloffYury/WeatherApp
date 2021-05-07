@@ -7,7 +7,7 @@ const instance = axios.create({
 const apiKey = '2cccc3f851397635425053d44508d7b7&units=metric';
 
 export const getWeather = () => {
-  return instance.get(`box/city?bbox=26,49,27,52,10&appid=${apiKey}`)
+  return instance.get(`box/city?bbox=28,49,27,54,10&appid=${apiKey}`)
     .then(respond => {
       return respond.data
     })

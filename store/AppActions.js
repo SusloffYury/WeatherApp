@@ -112,7 +112,7 @@ export const FileSystems = (coordinate) => {
           sound: "chime.aiff",
           category: "SOME_CATEGORY",
           link: "localNotificationLink",
-          // fireDate: Date.now() + 150,
+           fireDate: Date.now() + 150,
         })
         return;
       }
@@ -120,19 +120,17 @@ export const FileSystems = (coordinate) => {
         try {
           const response = await GetWeather.getYesterdayWeather(coordinate)
           ReactNativeFs.writeFile(PATH, JSON.stringify(response)).then(() => {
-            console.log('Notifications')
-            Notifications.postLocalNotification({
+             Notifications.postLocalNotification({
               body: "File with yesterday forecast succesfully donwloaded",
               title: "File Downloaded",
               sound: "chime.aiff",
               category: "SOME_CATEGORY",
               link: "localNotificationLink",
-              // fireDate: Date.now() + 150,
+               fireDate: Date.now() + 150,
             })
           })
           const readFile = await JSON.parse(ReactNativeFs.readFile(PATH))
-          console.log(`response ${response}`)
-          dispatch(ActionCreators.LoadingFile(response))
+            dispatch(ActionCreators.LoadingFile(response))
         } catch (error) {
           dispatch(ActionCreators
             .ErrorMessage(error))
@@ -143,8 +141,7 @@ export const FileSystems = (coordinate) => {
         const response = await GetWeather.getYesterdayWeather(coordinate)
         ReactNativeFs.writeFile(PATH, JSON.stringify(response))
           .then(() => {
-            console.log('Notifications')
-            Notifications.postLocalNotification({
+             Notifications.postLocalNotification({
               body: "File with yesterday forecast succesfully donwloaded",
               title: "File Downloaded",
               sound: "chime.aiff",

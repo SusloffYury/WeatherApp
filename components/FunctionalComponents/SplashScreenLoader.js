@@ -42,7 +42,6 @@ export const SplashScreenLoader = () => {
             );
           }
         );
-
         await SplashScreen.preventAutoHideAsync();
         await dispatch(Actions.FetchingUserWeather());
         await dispatch(Actions.GetCoordinate());
@@ -70,8 +69,6 @@ export const SplashScreenLoader = () => {
         onLayout={onLayoutRootView}
       />
     </NavigationContainer>
-
   );
 }
-
 
