@@ -26,10 +26,9 @@ export default function App() {
     console.log(`Notification opened: ${notification.payload}`);
     completion();
   });
-  // Notifications.events().registerRemoteNotificationsRegistered((event) => {
-  //   // TODO: Send the token to my server so it could send back push notifications...
-  //   console.log("Device Token Received", event.deviceToken);
-  // });
+  Notifications.events().registerRemoteNotificationsRegistered((event) => {
+    console.log("Device Token Received", event.deviceToken);
+  });
   Notifications.events().registerRemoteNotificationsRegistrationFailed((event) => {
     console.error(event);
   });
