@@ -9,6 +9,7 @@ export const CLEAR_INPUT = 'CLEAR_INPUT';
 export const CITY_NAME = 'CITY_NAME';
 export const IS_LOADING_INDICATOR = 'IS_LOADING_INDICATOR';
 export const LOADING_FILE = 'LOADING_FILE';
+export const SAVE_PHOTO = 'SAVE_PHOTO';
 
 export const ClearInput = () => {
   return {
@@ -64,5 +65,10 @@ export const HourlyWeatherCity = weatherParams => {
 export const SetUserCoordinate = coordinate => {
   return {
     type: USER_COORDINATE, userCoordinate: coordinate
+  }
+}
+export const SavePhoto = uri => {
+  return {
+    type: SAVE_PHOTO, uriPhoto: uri
   }
 }

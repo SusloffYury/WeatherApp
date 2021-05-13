@@ -1,12 +1,14 @@
 import moment from "moment";
 import formatTemp from '../components/FunctionalComponents/formatTemp';
 import WeatherIcons from '../models/Weather';
+
 import {
   CITY_NAME, CLEAR_INPUT, DAILY_WEATHER,
   ERROR_MESSAGE, HOURLY_WEATHER,
   IS_LOADING_INDICATOR, SEARCHING_CITY_WEATHER, USER_CITY,
   USER_COORDINATE,
   LOADING_FILE,
+  SAVE_PHOTO,
 } from './AppActionCreators';
 
 const initialState = {
@@ -19,6 +21,7 @@ const initialState = {
   cityName: '',
   IsLoadingIndicator: false,
   LoadingFile: '',
+  savePhotos: '',
 }
 
 export default (state = initialState, action) => {
@@ -80,7 +83,7 @@ export default (state = initialState, action) => {
             date: moment().add(index, 'days').format('MMM Do'),
           }
         })
-       return {
+      return {
         ...state,
         cityDailyWeather: DailyData
       }
@@ -127,6 +130,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         LoadingFile: YesterDayData
+      }
+    }
+    case SAVE_PHOTO: {
+      const photos = [...[], ...action.savePhotos]
+      return {
+        ...state,
+        savePhotos: photos
       }
     }
     default: return state;

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import PickImage from '../FunctionalComponents/imagePicker';
-import ShootImage from '../FunctionalComponents/shotPhoto';
 import {
-  SafeAreaView, StyleSheet, View, TouchableOpacity, Image
+  SafeAreaView, StyleSheet, View, TouchableOpacity, Image, Text
 } from 'react-native';
 import Colors from '../../constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { BottomSheet, ListItem } from 'react-native-elements'
-
+import * as Actions from '../../store/AppActions';
 
 const ImagePickerView = props => {
+  const { savePhotos: image } = useSelector(state => state.search)
+  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const list = [
     {
@@ -19,7 +20,7 @@ const ImagePickerView = props => {
     },
     {
       title: 'Take image',
-      onPress: () => ShootImage()
+      onPress: () => Actions.SaveImage()
     },
     {
       title: 'Cancel',
@@ -33,7 +34,10 @@ const ImagePickerView = props => {
       <View style={styles.screen}>
         <TouchableOpacity onPress={() => { setIsVisible(true) }}>
           <View style={styles.round}>
-            <Image style={styles.image} />
+            {(image) ?
+              <Image style={styles.image} source={image} /> :
+              <Text style={styles.roundText}>No image </Text>}
+
             <BottomSheet
               isVisible={isVisible}
               containerStyle={{ backgroundColor: Colors.accent }}
@@ -60,6 +64,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   round: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 200,
     height: 200,
     borderRadius: 100,
@@ -67,6 +73,10 @@ const styles = StyleSheet.create({
   },
   safearea: {
     flex: 1
+  },
+  roundText:{
+    color:'white',
+    zIndex:3,
   }
 })
 export default ImagePickerView;
