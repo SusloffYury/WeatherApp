@@ -106,15 +106,7 @@ export const FileSystems = (coordinate) => {
       let parseFile = JSON.parse(readFile);
       if (EqualDate(parseFile.data.current.dt)) {
         dispatch(ActionCreators.LoadingFile(parseFile))
-        Notifications.postLocalNotification({
-          body: "File with yesterday forecast succesfully donwloaded",
-          title: "File Downloaded",
-          sound: "chime.aiff",
-          category: "SOME_CATEGORY",
-          link: "localNotificationLink",
-           fireDate: Date.now() + 150,
-        })
-        return;
+          return;
       }
       else {
         try {
@@ -140,16 +132,6 @@ export const FileSystems = (coordinate) => {
       try {
         const response = await GetWeather.getYesterdayWeather(coordinate)
         ReactNativeFs.writeFile(PATH, JSON.stringify(response))
-          .then(() => {
-             Notifications.postLocalNotification({
-              body: "File with yesterday forecast succesfully donwloaded",
-              title: "File Downloaded",
-              sound: "chime.aiff",
-              category: "SOME_CATEGORY",
-              link: "localNotificationLink",
-              // fireDate: Date.now() + 150,
-            })
-          })
         const redFile = await ReactNativeFs.readFile(PATH)
         const parseFile = await JSON.parse(redFile)
         dispatch(ActionCreators.LoadingFile(response))

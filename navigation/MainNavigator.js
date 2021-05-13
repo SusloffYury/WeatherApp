@@ -6,6 +6,7 @@ import CityNav from './ViewDetail';
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
+
 const MainNavigator = props => {
   return (
     <Tab.Navigator

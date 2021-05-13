@@ -15,8 +15,10 @@ const DetailScreen = props => {
   const Time = moment().format('h:mm a')
   const name = props.route.params.name;
   const cities = useSelector(state => state.search.defaultCityWeather);
+  console.log(`Detail ${cities}`)
   const detailCity = cities
     .filter((item) => {
+      console.log(item)
       return item.cityName === name
     })
   return (
@@ -31,8 +33,8 @@ const DetailScreen = props => {
         <Image style={{
           width: itemWidth / 3.5,
           height: itemHeight / 8,
-
-        }} source={detailCity[0].icon} />
+        }}
+         source={detailCity[0].icon} />
         <Text style={styles.temp}>{`${detailCity[0].temperature} C`}</Text>
       </View>
     </View>

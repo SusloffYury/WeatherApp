@@ -25,20 +25,19 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case USER_CITY: {
+      const defaultCity =
+        action.weather
+          .list.map((el, index) => {
+            return {
+              id: index * 10,
+              cityName: el.name,
+              temperature: formatTemp(el.main.temp),
+              icon: WeatherIcons[el.weather[0].main],
+            }
+          }).slice(0, 8)
       return {
         ...state,
-        defaultCityWeather:
-          action.weather
-            .list.map((el, index) => {
-              if (index <= 7) {
-                return {
-                  id: index + 1,
-                  cityName: el.name,
-                  temperature: formatTemp(el.main.temp),
-                  icon: WeatherIcons[el.weather[0].main],
-                }
-              }
-            })
+        defaultCityWeather: defaultCity
       }
     }
     case SEARCHING_CITY_WEATHER: {
@@ -75,13 +74,13 @@ export default (state = initialState, action) => {
       const DailyData =
         action.weather.daily.map((item, index) => {
           return {
-            id: item.dt.toString(),
+            id: index * 5 + 2,
             temp: formatTemp(item.temp.day),
             icon: WeatherIcons[item.weather[0].main],
             date: moment().add(index, 'days').format('MMM Do'),
           }
         })
-      return {
+       return {
         ...state,
         cityDailyWeather: DailyData
       }
@@ -90,12 +89,13 @@ export default (state = initialState, action) => {
       const HourlyData =
         action.weather.hourly.map((item, index) => {
           return {
-            id: item.dt.toString(),
+            id: index * 51 + 1,
             icon: WeatherIcons[item.weather[0].main],
             temp: formatTemp(item.temp),
             date: moment().add(index, 'hour').format('HH:00 Do'),
           }
         })
+
       return {
         ...state,
         cityHourlyWeather: HourlyData
@@ -117,12 +117,13 @@ export default (state = initialState, action) => {
       const YesterDayData =
         action.fileName.data.hourly.map((item, index) => {
           return {
-            id: item.dt.toString() + 1,
+            id: index + 100,
             icon: WeatherIcons[item.weather[0].main],
             temp: formatTemp(item.temp),
             date: moment().subtract(1, 'day').add(index, 'hour').format('HH:00 Do'),
           }
         })
+
       return {
         ...state,
         LoadingFile: YesterDayData

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import MainNavigator from '../../navigation/MainNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { Notifications } from 'react-native-notifications';
+import { Platform } from 'react-native';
 
 export const SplashScreenLoader = () => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -28,20 +29,21 @@ export const SplashScreenLoader = () => {
         Notifications.registerRemoteNotifications();
         Notifications.events().registerNotificationReceivedForeground(
           (notification, completion) => {
-            completion({ alert: true, sound: true, badge: true });
+            completion({ alert: true, sound: true, badge: false });
             console.log(
               `Notification received in foreground: ${notification.title} : ${notification.body}`
             );
           }
         );
-        Notifications.events().registerNotificationReceivedForeground(
+        Notifications.events().registerNotificationOpened(
           (notification, completion) => {
-            completion({ alert: true, sound: true, badge: true });
-            console.log(
-              `Notification received in foreground: ${notification.title} : ${notification.body}`
-            );
-          }
-        );
+            completion(
+              () => {
+              //  Platform.OS === 'ios' ? null : dispatch(dailyhourlyactions.openFile())
+               return null
+              });
+            console.log(`Notification opened: ${notification.payload}`);
+          });
         await SplashScreen.preventAutoHideAsync();
         await dispatch(Actions.FetchingUserWeather());
         await dispatch(Actions.GetCoordinate());

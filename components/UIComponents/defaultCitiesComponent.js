@@ -19,7 +19,7 @@ const window = Dimensions.get("window");
 
 const CityDefault = (props) => {
   const [dimension, setDimesions] = useState({ window });
-  
+
   useEffect(() => {
     const onChange = ({ window }) => {
       setDimesions({ window })
@@ -34,6 +34,7 @@ const CityDefault = (props) => {
 
   const goToDetail = () => {
     props.navigation.navigate('DetailCity', { name: props.cityName })
+   
   }
 
   return (
@@ -67,10 +68,11 @@ const CityWeather = props => {
     IsLoadingIndicator: IsLoading,
     error: ErrorMessage,
     defaultCityWeather: weather } = useSelector(state => state.search)
-
+  
+    
   return (
     <View>
-      { (IsLoading) ?
+      {(IsLoading) ?
         (<IsLoadingIndicator />) :
         (ErrorMessage === '400') ?
           (<NoDataComponent />) :
