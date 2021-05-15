@@ -5,7 +5,7 @@ import * as Permissions from 'expo-permissions';
 const shootImage = async () => {
   const granted = async () => {
     if (Platform.OS !== 'web') {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      const { status } = await Permissions.askAsync(Permissions.CAMERA);
       if (status !== 'granted') {
         Alert.alert('Sorry, we need camera roll permissions to make this work!',
           'You need granted', [{ text: 'Ok' }]);
@@ -22,7 +22,8 @@ const shootImage = async () => {
       quality: 1,
     });
     console.log(result.uri);
-    return result.uri;
+    const image = await result.uri;
+    return image;
   }
 };
 export default shootImage;

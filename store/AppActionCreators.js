@@ -72,3 +72,8 @@ export const SavePhoto = uri => {
     type: SAVE_PHOTO, uriPhoto: uri
   }
 }
+export const Gallery = uri => {
+  return {
+    type: SAVE_PHOTO, uriPhoto: uri
+  }
+}

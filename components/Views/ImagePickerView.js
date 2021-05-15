@@ -10,17 +10,18 @@ import * as Actions from '../../store/AppActions';
 
 const ImagePickerView = props => {
   const { savePhotos: image } = useSelector(state => state.search)
+  console.log(`image ${image}`)
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const list = [
     {
       title: 'Open image',
-      onPress: () => PickImage()
+      onPress: () => dispatch(Actions.TakeImage())
 
     },
     {
       title: 'Take image',
-      onPress: () => Actions.SaveImage()
+      onPress: () => dispatch(Actions.SaveImage())
     },
     {
       title: 'Cancel',
@@ -35,7 +36,9 @@ const ImagePickerView = props => {
         <TouchableOpacity onPress={() => { setIsVisible(true) }}>
           <View style={styles.round}>
             {(image) ?
-              <Image style={styles.image} source={image} /> :
+              <Image style={styles.image} source={{
+                uri: image
+              }} /> :
               <Text style={styles.roundText}>No image </Text>}
 
             <BottomSheet
@@ -74,9 +77,14 @@ const styles = StyleSheet.create({
   safearea: {
     flex: 1
   },
-  roundText:{
-    color:'white',
-    zIndex:3,
+  image: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
+  roundText: {
+    color: 'white',
+    zIndex: 3,
   }
 })
 export default ImagePickerView;

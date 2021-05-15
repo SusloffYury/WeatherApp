@@ -7,6 +7,7 @@ import EqualDate from '../components/FunctionalComponents/equalDate';
 import { Platform } from 'react-native';
 import { Notifications } from 'react-native-notifications';
 import ShotPhoto from '../components/FunctionalComponents/shotPhoto';
+import  TakePhoto  from '../components/FunctionalComponents/imagePicker';
 export const FetchingUserWeather = () => {
   return async (dispatch) => {
     try {
@@ -167,17 +168,20 @@ export const OpenFile = () => {
 }
 
 export const SaveImage = () => {
-  var ReactNativeFs = require('react-native-fs');
-  var path = Platform.OS.toLowerCase() ===
-    'android' ? ReactNativeFs.DocumentDirectoryPath
-  + 'image.png' : ReactNativeFs.DocumentDirectoryPath + 'image.png';
-  const uri = ShotPhoto();
-  console.log(uri)
-  return (dispatch) => {
-
-
-    ReactNativeFs.writeFile(path, uri);
-    const image = ReactNativeFs.readFile(path);
-    dispatch(ActionCreators.SavePhoto(image))
+  // var ReactNativeFs = require('react-native-fs');
+  // const saveFile = ReactNativeFs.DocumentDirectoryPath + 'image12.png';
+  // const exists = await ReactNativeFs.exists(saveFile);
+  //  if(exists)
+  return async (dispatch) => {
+    const path = await ShotPhoto()
+    dispatch(ActionCreators.SavePhoto(path))
+   
+  }
+}
+export const TakeImage =()=>{
+  return async (dispatch)=>{
+    const path = await TakePhoto();
+    console.log(`path ${path}`)
+    dispatch(ActionCreators.Gallery(path))
   }
 }

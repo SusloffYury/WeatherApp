@@ -133,10 +133,10 @@ export default (state = initialState, action) => {
       }
     }
     case SAVE_PHOTO: {
-      const photos = [...[], ...action.savePhotos]
+      console.log(action.uriPhoto)
       return {
         ...state,
-        savePhotos: photos
+        savePhotos: action.uriPhoto
       }
     }
     default: return state;
