@@ -19,12 +19,12 @@ const SearchingResult = props => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginHorizontal: margin,
-      marginLeft:80,
+      marginLeft:55,
     }}>
       <View style={styles.data}>
         <View style={{
           marginVertical: 10,
-          marginLeft: margin + 7,
+          marginLeft: margin ,
         }}>
           <Text style={styles.cityFont}>{weatherCity.cityName}</Text>
         </View>

@@ -4,7 +4,7 @@ import * as Permissions from 'expo-permissions';
 
 
 export const verifyPermission = async () => {
-  const { status } = await Permissions.askAsync(Permissions.LOCATION)
+  const { status } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
   if (status !== 'granted') {
     Alert.alert(
       'Insufficient permissions!',

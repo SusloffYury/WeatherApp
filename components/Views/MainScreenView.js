@@ -46,6 +46,7 @@ const MainScreenView = props => {
               name={Platform.OS == 'android' ? 'md-search' : 'ios-search'}
               size={20}
               color='#000'
+              style={styles.inputLabel}
             />
             <TextInput
               style={styles.input}
@@ -113,11 +114,12 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
   },
-  safearea: {
-    flex: 1,
+  inputLabel: {
+    marginTop: 5,
+    marginRight: 5,
   },
   safearea: {
-    flex: 1
+    flex: 1,
   },
   ImageAdd: {
     width: 50,

@@ -4,6 +4,7 @@ import {
   SafeAreaView, StyleSheet, View
 } from 'react-native';
 import Config from 'react-native-config/index';
+import colors from '../../constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchingDailyWeather } from '../../store/AppActions';
 import DayliWeatherComponent from '../UIComponents/dailyWeatherComponent';
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     margin: 10,
-    backgroundColor: Config.COLOR,
+    backgroundColor: colors.primary,
     flex: 1
   },
   cityName: {

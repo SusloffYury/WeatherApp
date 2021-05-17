@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     margin: 10,
-    backgroundColor: Config.ACCENT,
+    backgroundColor: Colors.primary,
     flex: 1
   },
   cityName: {

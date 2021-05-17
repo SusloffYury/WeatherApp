@@ -52,7 +52,7 @@ const CityDefault = (props) => {
           <Text>{props.cityName}</Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image style={{ width: itemWidth / 5, height: itemWidth / 5 }}
+          <Image style={{ width: itemWidth / 4.4, height: itemWidth / 5 }}
             source={props.icon} />
         </View>
         <View style={styles.temp}>
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   temp: {
     marginVertical: 10,

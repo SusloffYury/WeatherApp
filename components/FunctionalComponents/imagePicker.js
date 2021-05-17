@@ -3,18 +3,19 @@ import { launchImageLibrary } from 'react-native-image-picker';;
 import { useDispatch } from 'react-redux';
 import { Gallery } from '../../store/AppActionCreators';
 const pickImage = async () => {
-  const dispatch = useDispatch();
-  launchImageLibrary({
+   launchImageLibrary({
     mediaType: 'photo',
     allowsEditing: true,
     cameraType: 'front',
     quality: 1,
     saveToPhotos: true,
   }, result => {
-    const path = result.uri
-    dispatch(Gallery(path))
-  }
-  );
-
+    // const dispatch = useDispatch();
+    // const path = result.uri
+    // dispatch(Gallery(path))
+    console.log(result.uri)
+    result.uri
+    
+  });
 };
 export default pickImage;

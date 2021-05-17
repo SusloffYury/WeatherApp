@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     margin: 10,
-    backgroundColor: Config.COLOR,
+    backgroundColor: Colors.primary,
     flex: 1
   },
   cityName: {

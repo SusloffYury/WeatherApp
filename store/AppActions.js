@@ -174,14 +174,8 @@ export const SaveImage = () => {
   //  if(exists)
   return async (dispatch) => {
     const path = await ShotPhoto()
-    dispatch(ActionCreators.SavePhoto(path))
+    console.log(path)
+    dispatch(ActionCreators.SavePhoto(path.uri))
    
-  }
-}
-export const TakeImage =()=>{
-  return async (dispatch)=>{
-    const path = await TakePhoto();
-    console.log(`path ${path}`)
-    dispatch(ActionCreators.Gallery(path))
   }
 }

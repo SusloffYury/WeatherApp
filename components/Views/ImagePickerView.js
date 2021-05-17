@@ -10,13 +10,12 @@ import * as Actions from '../../store/AppActions';
 
 const ImagePickerView = props => {
   const { savePhotos: image } = useSelector(state => state.search)
-  console.log(`image ${image}`)
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const list = [
     {
       title: 'Open image',
-      onPress: () => dispatch(Actions.TakeImage())
+      onPress: () => PickImage()
 
     },
     {
@@ -72,7 +71,11 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
+    borderColor:'black',
+    shadowColor:'grey',
+    borderWidth:10,
     backgroundColor: Colors.accent
+  
   },
   safearea: {
     flex: 1
