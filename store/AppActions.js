@@ -7,7 +7,8 @@ import EqualDate from '../components/FunctionalComponents/equalDate';
 import { Platform } from 'react-native';
 import { Notifications } from 'react-native-notifications';
 import ShotPhoto from '../components/FunctionalComponents/shotPhoto';
-import  TakePhoto  from '../components/FunctionalComponents/imagePicker';
+import TakePhoto from '../components/FunctionalComponents/imagePicker';
+
 export const FetchingUserWeather = () => {
   return async (dispatch) => {
     try {
@@ -176,6 +177,6 @@ export const SaveImage = () => {
     const path = await ShotPhoto()
     console.log(path)
     dispatch(ActionCreators.SavePhoto(path.uri))
-   
+
   }
 }

@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../store/AppActions';
 import DailyView from '../components/Views/DailyScreenView';
 import NoInternet from '../components/UIComponents/internetNotAvailable';
+import { useNetInfo } from "@react-native-community/netinfo";
+import { SafeAreaView } from 'react-native';
 
 const DailyScreen = props => {
   const dispatch = useDispatch();
+  const [isConnected, setIsConnected] = useState(true)
+  const connect = useNetInfo();
   const {
     userCoordinate: coordinate,
     error: IsError
   } = useSelector(state => state.search)
- 
+
 
   useEffect(
     () => {
@@ -18,8 +22,17 @@ const DailyScreen = props => {
       dispatch(Actions.FetchingDailyWeather(coordinate));
     }, [])
 
+  useEffect(() => {
+    if (connect.isConnected !== null) {
+      setIsConnected(connect.isConnected)
+    }
+  }, [connect])
   return (
-      <DailyView />
+    <SafeAreaView style={{ flex: 1 }}>
+      {(isConnected) ?
+        (<DailyView />) :
+        (<NoInternet />)}
+    </SafeAreaView>
   )
 }
 export default DailyScreen;

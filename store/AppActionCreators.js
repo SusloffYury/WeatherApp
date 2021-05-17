@@ -10,6 +10,7 @@ export const CITY_NAME = 'CITY_NAME';
 export const IS_LOADING_INDICATOR = 'IS_LOADING_INDICATOR';
 export const LOADING_FILE = 'LOADING_FILE';
 export const SAVE_PHOTO = 'SAVE_PHOTO';
+export const IS_CONNECTION = 'IS_CONNECTION';
 
 export const ClearInput = () => {
   return {
@@ -75,5 +76,11 @@ export const SavePhoto = uri => {
 export const Gallery = uri => {
   return {
     type: SAVE_PHOTO, uriPhoto: uri
+  }
+}
+
+export const isConnection = connect => {
+  return {
+    type: SAVE_PHOTO, isConnection: connect
   }
 }

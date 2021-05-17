@@ -9,6 +9,7 @@ import {
   USER_COORDINATE,
   LOADING_FILE,
   SAVE_PHOTO,
+  IS_CONNECTION,
 } from './AppActionCreators';
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   IsLoadingIndicator: false,
   LoadingFile: '',
   savePhotos: '',
+  isConnected: false,
 }
 
 export default (state = initialState, action) => {
@@ -133,12 +135,12 @@ export default (state = initialState, action) => {
       }
     }
     case SAVE_PHOTO: {
-      console.log(action.uriPhoto)
       return {
         ...state,
         savePhotos: action.uriPhoto
       }
     }
+   
     default: return state;
   }
 }
