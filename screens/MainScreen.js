@@ -22,17 +22,18 @@ const MainScreen = props => {
   }, [DebounceSearchTerm])
 
   useEffect(() => {
-    if (connect.isConnected !== null){
+    if (connect.isConnected !== null) {
       setIsConnected(connect.isConnected)
     }
-   }, [connect])
+  }, [connect.isConnected])
+  
   const clearInput = () => {
     dispatch(ClearInput())
     dispatch(ErrorMessage(''))
     dispatch(IsLoadingIndicator(false))
     setSearchTerm('')
   }
-  console.log('connect' + connect.isConnected)
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {(isConnected) ?

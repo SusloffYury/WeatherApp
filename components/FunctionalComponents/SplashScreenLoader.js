@@ -14,7 +14,7 @@ export const SplashScreenLoader = () => {
   const [appIsReady, setAppIsReady] = useState(false);
   const dispatch = useDispatch();
   const [active, setActive] = useState(true);
-  const [timer, setTimer] = useState(30000);
+  const [timer, setTimer] = useState(350000);
 
   Notifications.events().registerNotificationOpened(
     (notification, completion) => {

@@ -79,13 +79,16 @@ const MainScreenView = props => {
         <View style={{
           position: 'absolute',
           left: itemWidth / 2.5,
-          top: itemHeight / 1.3,
+          top: itemHeight / 1.2,
           zIndex: 3,
         }}>
           <TouchableOpacity style={styles.touch}
             onPress={() => goToImagePicker()}>
             <Image source={require('../../assets/add-photo.png')}
-              style={styles.ImageAdd}
+              style={{
+                width: 50,
+                height: 50
+              }}
             />
           </TouchableOpacity>
         </View>
@@ -115,17 +118,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputLabel: {
-    marginTop: 5,
-    marginRight: 5,
+    marginTop: 10,
+    marginRight: 10,
   },
   safearea: {
     flex: 1,
   },
-  ImageAdd: {
-    width: 50,
-    height: 50,
 
-  },
   touch: {
     width: 70,
     height: 70,

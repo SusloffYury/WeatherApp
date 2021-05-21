@@ -13,11 +13,11 @@ const ImagePickerView = props => {
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const list = [
-    {
-      title: 'Open image',
-      onPress: () => PickImage()
+    // {
+    //   title: 'Open image',
+    //   onPress: () => PickImage()
 
-    },
+    // },
     {
       title: 'Take image',
       onPress: () => dispatch(Actions.SaveImage())

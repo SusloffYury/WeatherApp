@@ -4,13 +4,16 @@ import GetUserCoordinate from '../api/getCoordinate';
 import * as GetWeather from '../api/weatherRequest';
 import * as ActionCreators from './AppActionCreators';
 import EqualDate from '../components/FunctionalComponents/equalDate';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { Notifications } from 'react-native-notifications';
 import ShotPhoto from '../components/FunctionalComponents/shotPhoto';
 import TakePhoto from '../components/FunctionalComponents/imagePicker';
+import { Dispatch } from 'redux';
+import { ActionCreatorsTypes } from './AppActionCreators';
+
 
 export const FetchingUserWeather = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch<ActionCreatorsTypes>) => {
     try {
       const response = await GetWeather.getWeather();
       dispatch(ActionCreators.UserWeatherCity(response))
@@ -21,7 +24,7 @@ export const FetchingUserWeather = () => {
 }
 
 export const SearchingCityWeather = cityName => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch<ActionCreatorsTypes>) => {
     dispatch(ActionCreators.IsLoadingIndicator(true))
     GetWeather
       .getCityWeather(cityName)
@@ -37,8 +40,8 @@ export const SearchingCityWeather = cityName => {
   }
 }
 
-export const FetchingDailyWeather = coordinate => {
-  return (dispatch) => {
+export const FetchingDailyWeather = (coordinate) => {
+  return (dispatch: Dispatch<ActionCreatorsTypes>) => {
     dispatch(ActionCreators.IsLoadingIndicator(true))
     GetWeather
       .getDailyWeather(coordinate)
@@ -54,7 +57,7 @@ export const FetchingDailyWeather = coordinate => {
 }
 
 export const FetchingHourlyWeather = (coordinate) => {
-  return (dispatch) => {
+  return (dispatch: Dispatch<ActionCreatorsTypes>) => {
     dispatch(ActionCreators.IsLoadingIndicator(true))
     GetWeather
       .getHourlyWeather(coordinate)
@@ -71,7 +74,7 @@ export const FetchingHourlyWeather = (coordinate) => {
 }
 
 export const GetCity = (coordinate) => {
-  return (dispatch) => {
+  return (dispatch: Dispatch<ActionCreatorsTypes>) => {
     GetWeather
       .getCityName(coordinate)
       .then(response => {
@@ -85,7 +88,7 @@ export const GetCity = (coordinate) => {
 }
 
 export const GetCoordinate = () => {
-  return (dispatch) => {
+  return (dispatch: Dispatch<ActionCreatorsTypes>) => {
     GetUserCoordinate()
       .then(coordinate => {
         dispatch(ActionCreators.SetUserCoordinate(coordinate))

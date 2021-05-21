@@ -13,6 +13,7 @@ const NoInternet = props => {
         <Image
           style={styles.image}
           source={require('../../assets/failIcon.png')} />
+          <Text>No internet connection</Text>
           </View>
         <View style={styles.containerText}>
           <Text style={styles.largeText}>Internet is not available</Text>
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
         screen: {
         width: itemWidth,
     height: itemHeight,
-    backgroundColor: Config.COLOR
+    backgroundColor: Color.primary
   },
   imageContainer: {
         justifyContent: 'center',

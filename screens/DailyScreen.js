@@ -1,8 +1,8 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../store/AppActions';
 import DailyView from '../components/Views/DailyScreenView';
-import NoInternet from '../components/UIComponents/internetNotAvailable';
+import NoInternet from '../components/UIComponents/noDataComponent';
 import { useNetInfo } from "@react-native-community/netinfo";
 import { SafeAreaView } from 'react-native';
 
@@ -23,10 +23,10 @@ const DailyScreen = props => {
     }, [])
 
   useEffect(() => {
-    if (connect.isConnected !== null) {
+    if (connect.isConnected !== null || connect.isConnected === false) {
       setIsConnected(connect.isConnected)
     }
-  }, [connect])
+  }, [connect.isConnected])
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {(isConnected) ?
